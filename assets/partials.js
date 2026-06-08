@@ -7,7 +7,7 @@
   const NAV = `
   <nav class="nav">
     <div class="nav-in">
-      <a href="index.html" class="brand">Jade Maa</a>
+      <a href="index.html" class="brand">Jade <em>Maa</em></a>
       <div class="nav-links">
         <a href="qui-suis-je.html"${active('qui-suis-je.html')}>Qui suis-je</a>
         <a href="la-bonne-methode.html"${active('la-bonne-methode.html')}>La Bonne Méthode</a>
