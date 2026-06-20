@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@300;400;450;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/app.css?v=17">
 </head>
-<body>
+<body class="home">
 
 <!-- NAV --><div id="nav-mount"></div>
 
@@ -20,7 +20,6 @@
   <div class="hero-veil"></div>
   <div class="aurora"><div class="orb"></div></div>
   <div class="hero-grain"></div>
-  <span class="ph-note" style="z-index:5;top:auto;bottom:78px;left:50%;transform:translateX(-50%)">Visuel de fond à remplacer</span>
   <div class="hero-content">
     <span class="eyebrow">Accompagnement · Retraites · Communauté</span>
     <h1>Plus jamais<br>sans <em>moi</em>.</h1>
@@ -44,7 +43,7 @@
         <span class="eyebrow reveal">Qui suis-je</span>
         <h2 class="reveal" data-d="1">Je m'appelle Jade,<br>et j'accompagne celles et ceux<br>qui veulent <em>se retrouver</em>.</h2>
         <p class="reveal" data-d="1">Accompagnante, créatrice de La Bonne Méthode et des Retraites de Jade, auteure de <em>Des mots sur nos maux</em>, j'ai fait des relations humaines le cœur de mon travail.</p>
-        <p class="reveal" data-d="2">Aujourd'hui, à travers l'accompagnement et les retraites, j'aide des milliers de personnes à ne plus jamais s'abandonner.</p>
+        <p class="reveal" data-d="2">Aujourd'hui, à travers l'accompagnement et les retraites, j'aide des personnes à ne plus jamais s'abandonner.</p>
       </div>
     </div>
   </div>
@@ -65,7 +64,7 @@
         <div class="ct"><div class="num">01</div><h3>La Bonne Méthode</h3><p>L'accompagnement en cohorte, sur 3 mois, avec une coach formée par Jade.</p><span class="go">En savoir plus →</span></div>
       </a>
       <a href="retraites.html" class="ucard reveal" data-d="1">
-        <img src="assets/images/retraites/plessis-piscine.png" alt="">
+        <img src="assets/images/retraites/manoir-facade.jpg" alt="Retraite au Manoir Ducey">
         <div class="veil"></div>
         <div class="ct"><div class="num">02</div><h3>Retraites</h3><p>Quelques jours hors du temps, en présence, pour revenir à soi en profondeur.</p><span class="go">Voir les dates →</span></div>
       </a>
@@ -79,14 +78,123 @@
   </div>
 </section>
 
-<!-- PREUVE -->
-<section class="proof">
-  <div class="stars">★★★★★</div>
-  <blockquote>« Pour la première fois, j'ai senti que je n'avais pas besoin de quelqu'un d'autre pour me sentir entière. »</blockquote>
-  <div class="who">Camille · La Bonne Méthode</div>
-  <div class="tp">
-    <svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 4.517 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-    4,3/5 « Excellent » sur Trustpilot
+<!-- AVIS TRUSTPILOT (carrousel maison) -->
+<section class="section tp-section" id="avis">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:40px">
+      <span class="eyebrow reveal">Leurs mots</span>
+      <h2 class="reveal" data-d="1">Ce qu'elles disent sur <em>Trustpilot</em>.</h2>
+    </div>
+    <div class="tp-head reveal" data-d="1">
+      <div class="tp-logo"><span class="tp-star tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span>Trustpilot</span></div>
+      <div class="tp-rating">
+        <div class="tp-stars tp-stars-lg"><span class="tp-star tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star tp-star-lg"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <span class="tp-score"><strong>Excellent</strong> · 4,3 sur 5</span>
+      </div>
+    </div>
+  </div>
+  <div class="tp-carousel reveal" data-d="1" aria-label="Avis clients sur Trustpilot">
+    <div class="tp-track">
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La bonne méthode transformera votre vie</h3>
+        <p class="tp-card-body">La bonne méthode m&#x27;a vraiment aidé à comprendre mes valeurs, à me prioriser, à me responsabiliser sur la création de mon bonheur et à savoir demander en exprimant mon besoin et mes émotions. La bonne méthode transformera votre…</p>
+        <div class="tp-card-foot"><span class="tp-name">Margot calvié</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 28 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La bonne méthode</h3>
+        <p class="tp-card-body">J&#x27;ai connu Jade sur les réseaux sociaux, je suis tombée en amour de cette femme formidable. J&#x27;ai tout de suite ressentie une totale confiance et je me suis inscrite à &quot;la bonne méthode &quot;. J&#x27;ai pu voir et ressentir mon évolution…</p>
+        <div class="tp-card-foot"><span class="tp-name">Valérie</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 25 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La Bonne Méthode est arrivée au bon</h3>
+        <p class="tp-card-body">La Bonne Méthode est arrivée au bon moment dans ma vie. J’étais perdue, comme anesthésiée, dans un brouillard perpétuel.. Les mots de Jade me parlaient tellement que je me suis laissé porter par cet accompagnement .. quel plaisir…</p>
+        <div class="tp-card-foot"><span class="tp-name">Tatiana FRANCK</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 24 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Avis du cœur 🤍</h3>
+        <p class="tp-card-body">Comment expliquer en quelques mots l’expérience que j’ai eu la chance de vivre? 🤔 L’accompagnement LBM m’a apporté exactement ce que je venais chercher ! Le format est complet : les lives en groupe, les supports de travail, les…</p>
+        <div class="tp-card-foot"><span class="tp-name">Mariam BAMBA</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 23 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La paix pour tous ❤️</h3>
+        <p class="tp-card-body">Avec la Bonne Méthode, j’ai appris à mieux me connaître : comprendre mes sentiments, mes ressentis et mes émotions, définir mes valeurs, reconnaître mes schémas d’enfance et poser des limites saines dans mon travail comme dans…</p>
+        <div class="tp-card-foot"><span class="tp-name">Martin</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Pour expliquer ce que cet</h3>
+        <p class="tp-card-body">Pour expliquer ce que cet accompagnement m’a apporté, il faudrait que j’écrive un véritable pavé tellement il y a de choses à dire. Pour commencer, Jade fait un travail exceptionnel dans l’association des coachs, et Meg-Anne m’a…</p>
+        <div class="tp-card-foot"><span class="tp-name">Elona Pelissier</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Quelle pepite cette accompagnement</h3>
+        <p class="tp-card-body">Quelle pepite cette accompagnement, le rythme 1 fois par semaine m’a beaucoup aidé à m’investir, j’ai enormément grandi, conscientiser beaucoup de choses . Mais surtout appris à lâcher prise, accepeter mon handicap, ma version de…</p>
+        <div class="tp-card-foot"><span class="tp-name">Christelle Da Silva</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Plus jamais sans moi</h3>
+        <p class="tp-card-body">Plus jamais sans moi. C’est la phrase qui conclu cet accompagnement pour moi. Un accompagnement plein de bienveillance, à notre rythme avec une réelle écoute qui fait du bien. Une aventure avec moi même qui m’a permise de me…</p>
+        <div class="tp-card-foot"><span class="tp-name">Inès Gomez</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La bonne méthode transformera votre vie</h3>
+        <p class="tp-card-body">La bonne méthode m&#x27;a vraiment aidé à comprendre mes valeurs, à me prioriser, à me responsabiliser sur la création de mon bonheur et à savoir demander en exprimant mon besoin et mes émotions. La bonne méthode transformera votre…</p>
+        <div class="tp-card-foot"><span class="tp-name">Margot calvié</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 28 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La bonne méthode</h3>
+        <p class="tp-card-body">J&#x27;ai connu Jade sur les réseaux sociaux, je suis tombée en amour de cette femme formidable. J&#x27;ai tout de suite ressentie une totale confiance et je me suis inscrite à &quot;la bonne méthode &quot;. J&#x27;ai pu voir et ressentir mon évolution…</p>
+        <div class="tp-card-foot"><span class="tp-name">Valérie</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 25 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La Bonne Méthode est arrivée au bon</h3>
+        <p class="tp-card-body">La Bonne Méthode est arrivée au bon moment dans ma vie. J’étais perdue, comme anesthésiée, dans un brouillard perpétuel.. Les mots de Jade me parlaient tellement que je me suis laissé porter par cet accompagnement .. quel plaisir…</p>
+        <div class="tp-card-foot"><span class="tp-name">Tatiana FRANCK</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 24 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Avis du cœur 🤍</h3>
+        <p class="tp-card-body">Comment expliquer en quelques mots l’expérience que j’ai eu la chance de vivre? 🤔 L’accompagnement LBM m’a apporté exactement ce que je venais chercher ! Le format est complet : les lives en groupe, les supports de travail, les…</p>
+        <div class="tp-card-foot"><span class="tp-name">Mariam BAMBA</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 23 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">La paix pour tous ❤️</h3>
+        <p class="tp-card-body">Avec la Bonne Méthode, j’ai appris à mieux me connaître : comprendre mes sentiments, mes ressentis et mes émotions, définir mes valeurs, reconnaître mes schémas d’enfance et poser des limites saines dans mon travail comme dans…</p>
+        <div class="tp-card-foot"><span class="tp-name">Martin</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Pour expliquer ce que cet</h3>
+        <p class="tp-card-body">Pour expliquer ce que cet accompagnement m’a apporté, il faudrait que j’écrive un véritable pavé tellement il y a de choses à dire. Pour commencer, Jade fait un travail exceptionnel dans l’association des coachs, et Meg-Anne m’a…</p>
+        <div class="tp-card-foot"><span class="tp-name">Elona Pelissier</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Quelle pepite cette accompagnement</h3>
+        <p class="tp-card-body">Quelle pepite cette accompagnement, le rythme 1 fois par semaine m’a beaucoup aidé à m’investir, j’ai enormément grandi, conscientiser beaucoup de choses . Mais surtout appris à lâcher prise, accepeter mon handicap, ma version de…</p>
+        <div class="tp-card-foot"><span class="tp-name">Christelle Da Silva</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+      <article class="tp-card">
+        <div class="tp-stars"><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span><span class="tp-star"><svg viewBox="0 0 24 24"><path d="M12 1.6l2.9 6.1 6.7.6-5.1 4.4 1.6 6.5L12 16.2 5.9 19.8l1.6-6.5L2.4 8.3l6.7-.6z"/></svg></span></div>
+        <h3 class="tp-card-title">Plus jamais sans moi</h3>
+        <p class="tp-card-body">Plus jamais sans moi. C’est la phrase qui conclu cet accompagnement pour moi. Un accompagnement plein de bienveillance, à notre rythme avec une réelle écoute qui fait du bien. Une aventure avec moi même qui m’a permise de me…</p>
+        <div class="tp-card-foot"><span class="tp-name">Inès Gomez</span><span class="tp-meta"><svg class="tp-check" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19.2 20 8.2l-1.5-1.5z"/></svg>Vérifié · 22 mai 2026</span></div>
+      </article>
+    </div>
+  </div>
+  <div class="wrap" style="text-align:center;margin-top:38px">
+    <a href="https://fr.trustpilot.com/review/jade-maa.com" target="_blank" rel="noopener" class="btn btn-ghost">Voir tous les avis sur Trustpilot</a>
   </div>
 </section>
 

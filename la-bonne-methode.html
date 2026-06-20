@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@300;400;450;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/app.css?v=17">
 </head>
 <body>
 <div id="nav-mount"></div>
@@ -21,7 +21,7 @@
     <h1 class="reveal" data-d="1">La Bonne <em>Méthode</em>.</h1>
     <p class="lead reveal" data-d="2">Un accompagnement en petit groupe, sur trois mois, pour comprendre vos schémas, dépasser vos blocages et avancer vers des relations plus saines. En groupe. Jamais en solo.</p>
     <div class="actions reveal" data-d="2" style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap">
-      <a href="#contact" class="btn btn-dark">Être recontactée</a>
+      <a href="#quiz" class="btn btn-dark">Réserver un appel</a>
       <a href="#methode" class="btn btn-ghost">Comment ça marche</a>
     </div>
   </div>
@@ -35,7 +35,7 @@
       <div class="play"><i></i></div>
       <figcaption>Présentation de La Bonne Méthode par Jade</figcaption>
     </figure>
-    <div style="text-align:center;margin-top:34px" class="reveal">
+    <div id="quiz" style="text-align:center;margin-top:34px;scroll-margin-top:110px" class="reveal">
       <a href="#" class="btn btn-dark">Faire le quiz d'éligibilité</a>
       <p style="margin-top:12px"><span class="note-todo">Quiz d'éligibilité à brancher</span></p>
     </div>
@@ -76,17 +76,6 @@
   </div>
 </section>
 
-<!-- PREUVE -->
-<section class="proof">
-  <div class="stars">★★★★★</div>
-  <blockquote>« La Bonne Méthode m'a vraiment aidée à comprendre mes valeurs, à me prioriser, à me responsabiliser. »</blockquote>
-  <div class="who">Avis Trustpilot vérifié</div>
-  <div class="tp">
-    <svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 4.517 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-    4,3/5 « Excellent » · La Bonne Méthode par Jade Maa
-  </div>
-</section>
-
 <!-- AVIS -->
 <section class="section">
   <div class="wrap">
@@ -122,31 +111,14 @@
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section-follow" id="contact">
-  <div class="wrap">
-    <div class="split">
-      <div class="col-text">
-        <span class="eyebrow reveal">On en parle ?</span>
-        <h2 class="reveal" data-d="1">Laissez-nous un mot,<br>on vous <em>recontacte</em>.</h2>
-        <p class="reveal" data-d="1">Une question, un doute, l'envie d'en savoir plus sur la prochaine cohorte ? Remplissez ce formulaire — on revient vers vous rapidement.</p>
-        <p class="reveal" data-d="2" style="font-size:.92rem">Ou écrivez-nous directement à <a href="mailto:contact@jade-maa.com" class="link-u" style="border:none;padding:0">contact@jade-maa.com</a></p>
-      </div>
-      <form class="form reveal" data-d="1" data-mock>
-        <div class="field"><label for="f-nom">Prénom &amp; nom</label><input id="f-nom" type="text" required></div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required></div>
-        <div class="field"><label for="f-objet">L'objet</label>
-          <select id="f-objet">
-            <option>Je veux en savoir plus sur La Bonne Méthode</option>
-            <option>Être prévenu·e de la prochaine session</option>
-            <option>Une autre question</option>
-          </select>
-        </div>
-        <div class="field"><label for="f-msg">Votre message</label><textarea id="f-msg" placeholder="Dites-nous où vous en êtes…"></textarea></div>
-        <button type="submit" class="btn btn-dark">Envoyer mon message</button>
-        <p class="fineprint">Vos informations restent confidentielles. Aucune newsletter sans votre accord.</p>
-      </form>
-    </div>
+<!-- RÉSERVER UN APPEL -->
+<section class="news" id="contact">
+  <span class="eyebrow">On en parle ?</span>
+  <h2>Le plus simple,<br>c'est d'en <em>parler</em>.</h2>
+  <p class="sub">Réservez un appel : on fait connaissance et on vérifie ensemble que c'est le bon moment pour vous. Sans engagement.</p>
+  <div class="actions" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+    <a href="#quiz" class="btn btn-dark">Réserver un appel</a>
+    <a href="https://wa.me/33652980093" target="_blank" rel="noopener" class="btn btn-ghost">Une question sur WhatsApp</a>
   </div>
 </section>
 
