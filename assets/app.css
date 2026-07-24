@@ -1,14 +1,15 @@
 /* ============================================================
-   JADE MAA — Design System v2
-   Doux · premium · éditorial. Cream / vert profond / or.
+   JADE MAA — Design System v2.1
+   DA calquée sur la plaquette Jade : crème chaud / terracotta / brun.
    ============================================================ */
 :root{
-  --bg:#F1EFE8; --bg-2:#E9E7DD; --bg-deep:#DEDCD0; --paper:#FBFAF5;
-  --noir:#262821; --green:#4C6F5A; --green-2:#5E8470;
-  --gold:#C39C8E; --gold-2:#996258; --gold-soft:#E0CDC4; --gold-text:#9A5C54;
-  --ink:#2E2D27; --muted:#6B6759; --muted-2:#726E61;
-  --line:rgba(38,40,33,.09); --line-light:rgba(255,255,255,.12);
-  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  --bg:#F6F1E8; --bg-2:#EFE8DC; --bg-deep:#E7DDCC; --paper:#FBF8F2;
+  --noir:#332E28; --green:#4A4138; --green-2:#5C5245;
+  --gold:#A26B4C; --gold-2:#8A5637; --gold-soft:#E3D0BE; --gold-text:#9C6644;
+  --ink:#3A352E; --muted:#6E675B; --muted-2:#7A7263;
+  --line:rgba(51,46,40,.10); --line-light:rgba(255,255,255,.12);
+  --serif:'Playfair Display',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  --script:'Monsieur La Doulaise','Playfair Display',cursive;
   --maxw:1240px; --pad:56px;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
@@ -32,11 +33,11 @@ em,.it{font-style:italic;color:var(--gold-text)}
 .js .img-reveal{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease)}
 .js .img-reveal.in{clip-path:inset(0 0 0 0)}
 
-/* ---- Boutons ---- */
-.btn{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;font-weight:500;padding:15px 30px;border-radius:100px;transition:.3s var(--ease);cursor:pointer;border:1px solid transparent}
-.btn-dark{background:var(--noir);color:var(--bg)}
-.btn-dark:hover{background:var(--gold);color:#fff}
-.btn-ghost{border-color:rgba(12,14,11,.28);color:var(--noir)}
+/* ---- Boutons (rectangulaires terracotta, façon plaquette) ---- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:15px 28px;border-radius:3px;transition:.3s var(--ease);cursor:pointer;border:1px solid transparent}
+.btn-dark{background:var(--gold);color:#fff}
+.btn-dark:hover{background:var(--gold-2);color:#fff}
+.btn-ghost{border-color:rgba(51,46,40,.32);color:var(--noir)}
 .btn-ghost:hover{background:var(--noir);color:var(--bg);border-color:var(--noir)}
 .btn-light{background:var(--bg);color:var(--noir)}
 .btn-light:hover{background:var(--gold);color:#fff}
@@ -60,24 +61,24 @@ em,.it{font-style:italic;color:var(--gold-text)}
 .nav-links a:hover::after{width:100%}
 .nav-links a.active-link{color:var(--gold-text)}
 .nav-links a.active-link::after{width:100%}
-.brand{font-family:var(--serif);font-style:normal;font-size:1.25rem;letter-spacing:.01em}
-.brand em{font-style:italic;color:var(--gold-text)}
-.nav-cta{font-size:.82rem;font-weight:500;padding:11px 22px;border:1px solid var(--noir);border-radius:100px;transition:.3s}
+.brand{font-family:var(--script);font-weight:400;font-style:normal;font-size:1.8rem;line-height:1;color:var(--gold-text);letter-spacing:.01em}
+.brand em{font-style:normal;color:inherit}
+.nav-cta{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:11px 22px;border:1px solid var(--noir);border-radius:3px;transition:.3s}
 .nav-cta:hover{background:var(--noir);color:var(--bg)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
 .burger span{width:24px;height:1.6px;background:var(--noir);transition:.3s}
 
 /* ---- HERO accueil (fond animé "univers") ---- */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px var(--pad) 90px;overflow:hidden;background:linear-gradient(158deg,#F0ECE2 0%,#F8F5EE 50%,#EDF0E9 100%)}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px var(--pad) 90px;overflow:hidden;background:linear-gradient(158deg,#F3EDE1 0%,#F9F5EC 50%,#F1E8D9 100%)}
 .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hero-bg img{width:100%;height:100%;object-fit:cover;transform-origin:center;animation:kenburns 38s ease-in-out infinite alternate}
 @keyframes kenburns{from{transform:scale(1.03)}to{transform:scale(1.08) translate(-1%,-1%)}}
 .hero-veil{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 62% 50% at 50% 50%,rgba(250,248,243,.80),rgba(249,247,241,.42) 60%,rgba(241,239,232,0) 84%),linear-gradient(to bottom,rgba(250,248,242,.60) 0%,rgba(248,246,239,.34) 42%,rgba(247,245,238,.50) 72%,rgba(241,239,232,.96) 100%)}
 .aurora{position:absolute;inset:0;z-index:2;overflow:hidden}
 .aurora::before,.aurora::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.32}
-.aurora::before{width:60vw;height:60vw;left:-10vw;top:-15vw;background:radial-gradient(circle at 30% 30%,#D9C4C0,transparent 70%);animation:drift1 22s var(--ease) infinite alternate}
-.aurora::after{width:55vw;height:55vw;right:-12vw;bottom:-18vw;background:radial-gradient(circle at 60% 40%,#C0C7BB,transparent 70%);animation:drift2 26s var(--ease) infinite alternate}
-.aurora .orb{position:absolute;left:50%;top:38%;width:46vw;height:46vw;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(159,168,150,.18),rgba(168,128,120,.12) 45%,transparent 66%);animation:breathe 9s ease-in-out infinite}
+.aurora::before{width:60vw;height:60vw;left:-10vw;top:-15vw;background:radial-gradient(circle at 30% 30%,#DFC5AC,transparent 70%);animation:drift1 22s var(--ease) infinite alternate}
+.aurora::after{width:55vw;height:55vw;right:-12vw;bottom:-18vw;background:radial-gradient(circle at 60% 40%,#D9CBB6,transparent 70%);animation:drift2 26s var(--ease) infinite alternate}
+.aurora .orb{position:absolute;left:50%;top:38%;width:46vw;height:46vw;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(200,164,128,.16),rgba(162,107,76,.10) 45%,transparent 66%);animation:breathe 9s ease-in-out infinite}
 @keyframes drift1{to{transform:translate(8vw,6vw) scale(1.15)}}
 @keyframes drift2{to{transform:translate(-7vw,-5vw) scale(1.1)}}
 @keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-50%,-50%) scale(1.12);opacity:1}}
@@ -199,11 +200,11 @@ h2.big{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,4.6vw,3.5re
 .news{text-align:center;padding:110px 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .news h2{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.14;color:var(--noir);max-width:640px;margin:14px auto}
 .news .sub{color:var(--muted);max-width:440px;margin:0 auto 34px}
-.news form{display:flex;max-width:470px;margin:0 auto;border:1px solid rgba(12,14,11,.22);border-radius:100px;padding:6px 6px 6px 22px;background:var(--paper)}
+.news form{display:flex;max-width:470px;margin:0 auto;border:1px solid rgba(51,46,40,.22);border-radius:4px;padding:6px 6px 6px 22px;background:var(--paper)}
 .news input{flex:1;border:none;background:transparent;outline:none;font-family:var(--sans);font-size:.92rem;color:var(--ink)}
 .news input::placeholder{color:var(--muted-2)}
-.news button{border:none;background:var(--noir);color:var(--bg);border-radius:100px;padding:12px 26px;font-family:var(--sans);font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s;white-space:nowrap}
-.news button:hover{background:var(--gold)}
+.news button{border:none;background:var(--gold);color:#fff;border-radius:3px;padding:12px 26px;font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .3s;white-space:nowrap}
+.news button:hover{background:var(--gold-2)}
 
 /* ---- Détail retraite ---- */
 .r-hero{position:relative;height:78vh;min-height:520px;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
@@ -361,7 +362,7 @@ footer{background:var(--noir);color:#cfc9bb;padding:80px var(--pad) 40px}
 }
 
 /* Bloc vidéo doux (plus de rectangle vert) */
-.video-ph{position:relative;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#E4DDCB 0%,#DCE2D7 55%,#E7E0CE 100%);border:1px solid var(--line)}
+.video-ph{position:relative;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#EBE1CE 0%,#E4D8C3 55%,#EDE3D0 100%);border:1px solid var(--line)}
 .video-ph .play{width:78px;height:78px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;background:rgba(253,251,245,.6);transition:.3s}
 .video-ph:hover .play{background:var(--gold)}
 .video-ph .play i{width:0;height:0;border-left:18px solid var(--gold);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px;transition:.3s}
@@ -380,8 +381,8 @@ footer{background:var(--noir);color:#cfc9bb;padding:80px var(--pad) 40px}
 @media(max-width:680px){.cards.two,.r-gallery.duo{grid-template-columns:1fr}}
 
 /* ---- Home : lisibilité du texte sur le hero clair (halo doux) ---- */
-.home .hero .eyebrow{color:#8A4F48;text-shadow:0 1px 16px rgba(249,247,242,.85),0 0 4px rgba(249,247,242,.7)}
-.home .hero .eyebrow::before,.home .hero .eyebrow::after{opacity:.75;background:#8A4F48}
+.home .hero .eyebrow{color:#8A5637;text-shadow:0 1px 16px rgba(249,247,242,.85),0 0 4px rgba(249,247,242,.7)}
+.home .hero .eyebrow::before,.home .hero .eyebrow::after{opacity:.75;background:#8A5637}
 .home .hero h1{text-shadow:0 2px 26px rgba(249,247,242,.7)}
 .home .hero h1 em,.home .hero h1 .it{text-shadow:0 1px 18px rgba(249,247,242,.6)}
 .home .hero .sub{color:#312F28;text-shadow:0 1px 16px rgba(249,247,242,.95)}
@@ -419,3 +420,13 @@ footer{background:var(--noir);color:#cfc9bb;padding:80px var(--pad) 40px}
 /* ---- Bloc Calendly intégré ---- */
 .calendly-block{max-width:760px;margin:0 auto}
 .calendly-inline-widget{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+
+/* ============================================================
+   DA plaquette Jade — signature script & finitions
+   ============================================================ */
+.script{font-family:var(--script);font-weight:400;color:var(--gold-text)}
+.nav:not(.scrolled) .brand{text-shadow:0 1px 14px rgba(249,247,242,.9),0 0 5px rgba(249,247,242,.75)}
+.foot-brand .serif{font-family:var(--script);font-weight:400;font-size:2.3rem}
+.foot-brand .serif em{font-style:normal;color:var(--gold-soft)}
+.serif,.sec-head h2,h2.big,.split h2,.hero h1,.page-hero h1,.r-hero h1{font-weight:400}
+.qa summary{font-weight:400}
