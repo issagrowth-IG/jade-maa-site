@@ -431,3 +431,46 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 /* ---- Bloc Calendly intégré ---- */
 .calendly-block{max-width:760px;margin:0 auto}
 .calendly-inline-widget{border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#FFFEFC}
+
+/* ---- Chapô de page intérieure (plusieurs paragraphes) ---- */
+.page-hero .hero-text{max-width:640px}
+.page-hero .hero-text p{margin-top:18px;color:var(--ink)}
+.page-hero .hero-text .lead{margin-top:28px}
+
+/* ---- Programme d'une retraite ---- */
+.prog{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.prog-block h3{font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--titre)}
+.prog-block .sub{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);margin:10px 0 22px}
+.day{padding:24px 0;border-top:1px solid var(--line)}
+.day .lb{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--terra)}
+.day h4{font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1.3;color:var(--titre);margin:8px 0 10px}
+.day p{font-size:.94rem;color:var(--ink);line-height:1.75}
+.daily{list-style:none;display:grid;gap:11px;margin-top:6px}
+.daily li{padding-left:26px;position:relative;color:var(--fonce);font-size:.97rem}
+.daily li::before{content:"✦";position:absolute;left:0;color:var(--terra)}
+
+/* ---- Tes accompagnantes ---- */
+.persons{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.person{display:flex;flex-direction:column;align-items:center;text-align:center}
+.person .av{width:154px;height:154px;border-radius:50%;overflow:hidden;background:var(--bg-2);border:1px solid var(--line);flex:none}
+.person .av img{width:100%;height:100%;object-fit:cover}
+.person .av.mono{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2.7rem;color:var(--terra)}
+.person h3{font-family:var(--serif);font-weight:500;font-size:1.75rem;color:var(--titre);margin:26px 0 16px}
+.person p{font-size:.97rem;color:var(--ink);max-width:430px}
+.person blockquote{font-family:var(--serif);font-style:italic;font-size:1.15rem;line-height:1.5;color:var(--brun-2);margin-top:22px;max-width:430px}
+.person .sign{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);margin-top:12px}
+
+/* ---- Bloc de clôture éditorial ---- */
+.closing{text-align:center;max-width:780px;margin:0 auto}
+.closing p{font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,2.8vw,2.05rem);line-height:1.5;color:var(--titre)}
+.closing .btn{margin-top:38px}
+
+@media(max-width:980px){
+  .prog,.persons{grid-template-columns:1fr;gap:48px}
+}
+
+/* ---- Galerie 3 colonnes (6 photos, sans grande vignette) ---- */
+.r-gallery.trio{grid-template-columns:repeat(3,1fr);grid-auto-rows:230px}
+.r-gallery.trio .g:first-child{grid-column:auto;grid-row:auto}
+@media(max-width:980px){.r-gallery.trio{grid-template-columns:repeat(2,1fr);grid-auto-rows:220px}}
+@media(max-width:680px){.r-gallery.trio{grid-template-columns:1fr;grid-auto-rows:230px}}
