@@ -479,3 +479,28 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .r-gallery.trio .g:first-child{grid-column:auto;grid-row:auto}
 @media(max-width:980px){.r-gallery.trio{grid-template-columns:repeat(2,1fr);grid-auto-rows:220px}}
 @media(max-width:680px){.r-gallery.trio{grid-template-columns:1fr;grid-auto-rows:230px}}
+
+/* ---- Widget avis Amazon (page livre) ---- */
+.amz-head{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:34px 0 40px;font-family:Arial,Helvetica,sans-serif}
+.amz-score{font-size:1.9rem;font-weight:700;color:#0F1111;line-height:1}
+.amz-score small{font-size:1rem;font-weight:400;color:#565959}
+.amz-stars{position:relative;display:inline-block;font-size:1.5rem;line-height:1;letter-spacing:3px;color:#E3E6E6}
+.amz-stars::before{content:"★★★★★"}
+.amz-stars i{position:absolute;left:0;top:0;overflow:hidden;color:#FFA41C;font-style:normal;white-space:nowrap}
+.amz-stars i::before{content:"★★★★★";letter-spacing:3px}
+.amz-meta{font-size:.92rem;color:#565959}
+.amz-meta a{color:#007185;text-decoration:underline;text-underline-offset:2px}
+.amz-carousel{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.amz-track{display:flex;width:max-content;align-items:stretch;animation:amzscroll 60s linear infinite;padding:6px 0}
+.amz-carousel:hover .amz-track{animation-play-state:paused}
+@keyframes amzscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.amz-card{flex:0 0 330px;width:330px;margin-right:22px;background:#fff;border:1px solid #D5D9D9;border-radius:8px;padding:22px 24px;font-family:Arial,Helvetica,sans-serif;color:#0F1111;text-align:left}
+.amz-card .who{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.amz-card .pfp{width:30px;height:30px;border-radius:50%;flex:none;background:#F0F2F2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9' r='4' fill='%23B0B7B7'/%3E%3Cpath d='M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5' fill='%23B0B7B7'/%3E%3C/svg%3E") center 3px/70%25 no-repeat;border:1px solid #D5D9D9}
+.amz-card .nm{font-size:.85rem;color:#0F1111}
+.amz-card .st{font-size:1.02rem;color:#FFA41C;letter-spacing:2px;line-height:1;margin-bottom:5px}
+.amz-card .ttl{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.amz-card .dt{font-size:.77rem;color:#565959;margin-bottom:3px}
+.amz-card .avp{font-size:.73rem;font-weight:700;color:#C45500;margin-bottom:9px}
+.amz-card .bd{font-size:.86rem;line-height:1.55;color:#0F1111;margin:0}
+@media(max-width:680px){.amz-card{flex-basis:290px;width:290px;padding:18px 20px}.amz-head{gap:12px}}

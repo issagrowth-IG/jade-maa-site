@@ -47,3 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// --- Widget avis Amazon (page livre) : duplication du track pour boucle infinie ---
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.amz-track').forEach(track => {
+    track.innerHTML += track.innerHTML;
+  });
+});
