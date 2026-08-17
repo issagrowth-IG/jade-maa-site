@@ -128,6 +128,7 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:56px}
 .principle{padding-top:28px;border-top:1px solid var(--line)}
 .principle .n{font-family:var(--serif);font-style:italic;color:var(--terra);font-size:1.1rem}
+.principle .p-ico svg{width:32px;height:32px;stroke:var(--terra);fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
 .principle h3{font-family:var(--serif);font-weight:500;font-size:1.6rem;margin:14px 0 12px;color:var(--titre)}
 .principle p{color:var(--ink);font-size:.96rem}
 
