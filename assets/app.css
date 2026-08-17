@@ -504,3 +504,14 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .amz-card .avp{font-size:.73rem;font-weight:700;color:#C45500;margin-bottom:9px}
 .amz-card .bd{font-size:.86rem;line-height:1.55;color:#0F1111;margin:0}
 @media(max-width:680px){.amz-card{flex-basis:290px;width:290px;padding:18px 20px}.amz-head{gap:12px}}
+
+/* ---- Pages légales ---- */
+.legal{max-width:760px}
+.legal h2{font-family:var(--serif);font-weight:500;font-size:1.7rem;color:var(--titre);margin:52px 0 16px}
+.legal h2:first-child{margin-top:0}
+.legal p{margin-bottom:14px}
+.legal ul{margin:0 0 14px 22px}
+.legal li{margin-bottom:8px}
+.legal a{color:var(--brun-2);border-bottom:1px solid currentColor;padding-bottom:1px}
+.legal a:hover{color:var(--terra)}
+.legal-date{margin-top:56px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brun-2)}

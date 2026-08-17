@@ -38,8 +38,8 @@
       <nav>
         <a href="https://fr.trustpilot.com/review/jade-maa.com" target="_blank" rel="noopener">Avis Trustpilot</a>
         <a href="mailto:contact@jade-maa.com">Contact</a>
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-de-confidentialite.html">Confidentialité</a>
       </nav>
     </div>
   </footer>`;
