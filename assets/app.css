@@ -267,7 +267,7 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .incl li{list-style:none;padding-left:26px;position:relative;color:var(--fonce);font-size:.95rem}
 .incl li::before{content:"✦";position:absolute;left:0;color:var(--terra)}
 .r-aside{position:sticky;top:110px;background:#FFFEFC;border:1px solid var(--line);border-radius:8px;padding:32px}
-.r-aside .price{font-family:var(--serif);font-size:2.3rem;color:var(--titre)}
+.r-aside .price{font-family:var(--sans);font-weight:300;font-size:2rem;letter-spacing:.01em;color:var(--titre)}
 .r-aside .price small{font-size:.9rem;color:var(--brun-2)}
 .r-aside .rooms{margin:18px 0;border-top:1px solid var(--line)}
 .r-aside .rooms div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem}
@@ -401,7 +401,7 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .r-sticky-bar{display:none}
 @media(max-width:680px){
   .r-sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:45;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 20px;background:rgba(250,247,244,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
-  .r-sticky-bar .px{font-family:var(--serif);font-size:1.2rem;color:var(--titre);line-height:1}
+  .r-sticky-bar .px{font-family:var(--sans);font-weight:400;font-size:1.05rem;color:var(--titre);line-height:1}
   .r-sticky-bar .px small{font-size:.74rem;color:var(--ink)}
   .r-sticky-bar .btn{padding:12px 22px}
   body.has-sticky{padding-bottom:72px}
