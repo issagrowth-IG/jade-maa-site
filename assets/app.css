@@ -185,6 +185,9 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .bq .qm{font-family:var(--serif);font-size:3.4rem;line-height:.6;color:var(--rose);margin-bottom:22px}
 .bq p{font-family:var(--serif);font-style:italic;font-size:1.22rem;line-height:1.6;color:#F7F0E8}
 .bq .who{margin-top:auto;padding-top:22px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
+.tp-stars{display:block;width:106px;height:18px;box-sizing:content-box;background-origin:content-box;background-clip:content-box;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%2300B67A'/%3E%3Cpath fill='%23FFF' d='M12 4.2l2.1 5.3 5.7.4-4.4 3.6 1.4 5.5-4.8-3.1-4.8 3.1 1.4-5.5-4.4-3.6 5.7-.4z'/%3E%3C/svg%3E");background-size:18px 18px;background-repeat:space no-repeat}
+.bq .tp-stars{margin-top:auto;padding-top:22px}
+.bq .tp-stars+.who{margin-top:0;padding-top:12px}
 .band .more{text-align:center;margin-top:64px}
 .band .more a{font-size:.85rem;color:#E9DACD;border-bottom:1px solid rgba(233,218,205,.5);padding-bottom:3px;transition:color .3s}
 .band .more a:hover{color:#fff}
