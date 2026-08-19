@@ -424,6 +424,13 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 /* Variantes de grille pour pages à 2 éléments */
 .cards.two{grid-template-columns:1fr 1fr}
 .r-gallery.duo{grid-template-columns:1fr 1fr;grid-auto-rows:260px}
+/* ---- Retours en vidéo (hub des séjours) ---- */
+.v-retours{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;max-width:820px;margin:0 auto}
+.v-retours .vr{display:flex;flex-direction:column;gap:12px}
+.v-retours video{width:100%;aspect-ratio:9/16;object-fit:cover;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;display:block}
+.v-retours figcaption{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--ink);text-align:center}
+@media(max-width:680px){.v-retours{grid-template-columns:1fr;max-width:380px;gap:34px}}
+
 .r-gallery.duo .g:first-child{grid-column:auto;grid-row:auto}
 @media(max-width:680px){.cards.two,.r-gallery.duo{grid-template-columns:1fr}}
 
@@ -532,9 +539,6 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .prose .sign{font-family:var(--script);font-size:2.6rem;color:var(--brun);line-height:1;margin-top:44px}
 @media(max-width:720px){.prose p.stand{margin:38px 0}}
 
-/* ---- Avatars accompagnantes : recadrage fin (retour Jade 18/08) ---- */
-.person .av img.pos-down{transform:scale(1.14) translateY(5%)}
-.person .av img.pos-up{transform:scale(1.12) translateY(-4%)}
 
 /* ---- Parcours numéroté (La Bonne Méthode) ---- */
 .journey{display:grid;gap:0;max-width:900px;margin:0 auto}
