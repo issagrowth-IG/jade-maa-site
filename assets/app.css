@@ -626,7 +626,7 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
    largeur se lisent comme un rate, pas comme une hierarchie. La marge creme
    est le cadre, conformement a la charte "maison d'edition". */
 @media(max-width:680px){
-  .hero-ed .hp{width:calc(100% - var(--pad)*2);margin-inline:auto}
+  .hero-ed .hp{display:none}
 }
 
 /* 2.2 · Heros sejour — manoir-facade.jpg / plessis-facade.jpg, 3:2.

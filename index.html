@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=30">
+<link rel="stylesheet" href="assets/app.css?v=31">
 </head>
 <body class="home">
 
@@ -26,7 +26,14 @@
     </div>
   </div>
   <div class="hp">
-    <img src="assets/images/jade-hero.jpg" width="1400" height="2100" decoding="async" fetchpriority="high" alt="Jade Maa">
+    <!-- Sous 680 px la photo du hero n'est pas affichee (elle faisait doublon avec
+         celle de "Mon histoire" : meme jour, meme tenue, meme piece). Le <picture>
+         sert alors un GIF transparent de 43 octets, pour que les 355 Ko du fichier
+         ne partent pas en priorite haute sur mobile. -->
+    <picture>
+      <source media="(max-width:680px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+      <img src="assets/images/jade-hero.jpg" width="1400" height="2100" decoding="async" fetchpriority="high" alt="Jade Maa">
+    </picture>
   </div>
 </header>
 
