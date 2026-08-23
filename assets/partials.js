@@ -11,7 +11,7 @@
         <a href="qui-suis-je.html"${active('qui-suis-je.html')}>À propos</a>
         <a href="la-bonne-methode.html"${active('la-bonne-methode.html')}>La bonne méthode</a>
         <a href="retraites.html"${active('retraites.html')}>Les séjours</a>
-        <a href="evenements.html"${active('evenements.html')}>Les conférences</a>
+        <a href="evenements.html"${active('evenements.html')}>Les événements</a>
         <a href="le-livre.html"${active('le-livre.html')}>Le livre</a>
       </div>
       <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
