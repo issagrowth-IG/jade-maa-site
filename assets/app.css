@@ -585,7 +585,10 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .journey .jp:last-child{border-bottom:1px solid var(--line)}
 .journey .jp .n{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--terra);letter-spacing:.06em}
 .journey .jp h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3vw,2.1rem);color:var(--titre);margin:10px 0 18px}
-.journey .jp p{color:var(--ink);margin-top:14px}
+/* Le bloc reste a 900px (les filets et les numeros portent la section), mais
+   le texte lit a la meme mesure que .prose : au-dela on montait a 100
+   caracteres par ligne, contre ~70 partout ailleurs sur le site. */
+.journey .jp p{color:var(--ink);margin-top:14px;max-width:720px}
 .journey .jp p.q{color:var(--brun-2);font-style:italic}
 
 /* ============================================================
@@ -860,6 +863,15 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
   .ft-bottom nav a::after,.breadcrumb a::after{content:"";position:absolute;
     top:50%;left:50%;transform:translate(-50%,-50%);
     width:100%;min-width:44px;height:44px}
+  /* Meme traitement pour la signature de la nav et celle du pied de page :
+     la zone de touche s'etend, le dessin ne bouge pas. */
+  .brand,.ft-sig{position:relative}
+  .brand::after,.ft-sig::after{content:"";position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width:100%;height:44px}
+  /* Liens autonomes en fin de section : le padding vertical d'un element
+     inline agrandit la cible sans toucher a la hauteur de ligne. */
+  .link-u,.band .more a,.form .fineprint a{padding-block:14px}
 }
 
 /* 5.4 · Plus aucun texte sous 13 px. */
@@ -878,6 +890,13 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 }
 @media(max-width:420px){
   .btn{padding:15px 20px;letter-spacing:.12em}
+}
+/* Complements a la regle 5.4 : ces quatre-la etaient passes au travers.
+   Les trois premiers viennent des pages conferences / sejours. */
+@media(max-width:820px){
+  .event .date .m{font-size:.84rem}
+  .event .tag{font-size:.82rem}
+  .r-sticky-bar .px small,.r-aside .price small{font-size:.84rem}
 }
 
 /* 5.5 · Pied de page : la ligne qui deborde reste centree, le coeur
