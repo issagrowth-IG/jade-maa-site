@@ -152,7 +152,11 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .ocard h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;line-height:1.2;color:var(--titre);margin:18px 0 12px}
 .ocard p{font-size:.9rem;line-height:1.7;color:var(--ink)}
 .ocard .btn{margin-top:auto;padding:13px 26px;font-size:.66rem}
-.ocard .ct .btn{margin-top:22px}
+/* Le bouton est pousse en bas de carte a TOUTES les largeurs : au-dessus de
+   1080px un margin-top fixe reprenait le dessus sur le margin-top:auto et les
+   4 boutons tombaient sur deux lignes de base (29px d'ecart). */
+.ocard .ct .btn{margin-top:auto}
+.ocard p{margin-bottom:22px}
 
 /* ---- Cartes photo (retraites) ---- */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
@@ -301,7 +305,9 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .r-aside .rooms{margin:18px 0;border-top:1px solid var(--line)}
 .r-aside .rooms div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem}
 .r-aside .rooms span{color:var(--ink)}
-.r-aside .btn{width:100%;justify-content:center;margin-bottom:10px}
+/* text-align en plus de justify-content : le second centre la boite flex,
+   pas les lignes du libelle quand il passe sur deux lignes. */
+.r-aside .btn{width:100%;justify-content:center;text-align:center;margin-bottom:10px}
 .r-aside .fineprint{font-size:.86rem;color:var(--ink);line-height:1.7}
 .r-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;grid-auto-rows:200px}
 .r-gallery .g{border-radius:6px;overflow:hidden}
@@ -542,7 +548,10 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .amz-track{padding:6px 0}
 .amz-card{flex:0 0 min(330px,84vw);width:auto;margin-right:22px;background:#fff;border:1px solid #D5D9D9;border-radius:8px;padding:22px 24px;font-family:Arial,Helvetica,sans-serif;color:#0F1111;text-align:left}
 .amz-card .who{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.amz-card .pfp{width:30px;height:30px;border-radius:50%;flex:none;background:#F0F2F2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9' r='4' fill='%23B0B7B7'/%3E%3Cpath d='M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5' fill='%23B0B7B7'/%3E%3C/svg%3E") center 3px/70%25 no-repeat;border:1px solid #D5D9D9}
+/* La taille de fond s'ecrit 70%, pas 70%25 : l'encodage URL avait deborde
+   hors du url(), ce qui invalidait le raccourci background en entier et
+   laissait 7 ronds vides a cote des avis. */
+.amz-card .pfp{width:30px;height:30px;border-radius:50%;flex:none;background:#F0F2F2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9' r='4' fill='%23B0B7B7'/%3E%3Cpath d='M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5' fill='%23B0B7B7'/%3E%3C/svg%3E") center 3px/70% no-repeat;border:1px solid #D5D9D9}
 .amz-card .nm{font-size:.85rem;color:#0F1111}
 .amz-card .st{font-size:1.02rem;color:#FFA41C;letter-spacing:2px;line-height:1;margin-bottom:5px}
 .amz-card .ttl{font-weight:700;font-size:.95rem;margin-bottom:4px}
@@ -552,7 +561,11 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 @media(max-width:680px){.amz-card{padding:18px 20px}.amz-head{gap:12px}}
 
 /* ---- Pages légales ---- */
-.legal{max-width:760px}
+/* Le bloc garde la largeur de .wrap, sinon son margin auto le recentrait et
+   le corps de texte decrochait de 240px par rapport au titre de la page.
+   La mesure de lecture est portee par les enfants. */
+.legal{max-width:var(--maxw)}
+.legal>*{max-width:760px}
 .legal h2{font-family:var(--serif);font-weight:500;font-size:1.7rem;color:var(--titre);margin:52px 0 16px}
 .legal h2:first-child{margin-top:0}
 .legal p{margin-bottom:14px}
@@ -659,8 +672,11 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
    Base : reprend a l'identique ce qui etait en style inline. */
 .split .col-media.ar-objet img{object-fit:contain;padding:34px}
 .split .col-media.ar-objet.p18 img{padding:18px}
+/* Le cadre paysage vaut a TOUTES les largeurs : enferme dans la requete
+   ci-dessous, il laissait le 4/5 de base recadrer en portrait une photo 3:2
+   au-dessus de 980px (le cadrage sautait entre 980 et 981). */
+.split .col-media.ar-paysage{aspect-ratio:3/2}
 @media(max-width:980px){
-  .split .col-media.ar-paysage{aspect-ratio:3/2}
   .split .col-media.ar-portrait{aspect-ratio:4/5;width:min(100%,440px);margin-inline:auto}
   .split .col-media.ar-objet{width:min(100%,300px);margin-inline:auto}
   .split .col-media.ar-objet img,
@@ -677,6 +693,24 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 }
 @media(max-width:680px){
   .r-gallery,.r-gallery.trio{gap:22px}
+  /* Cette regle doit venir APRES le bloc 1080 ci-dessus : a specificite egale
+     c'est le dernier declare qui gagne, et la galerie du telephone restait en
+     2 colonnes de vignettes de 154x103. */
+  .r-gallery.trio{grid-template-columns:1fr}
+}
+/* Palier remonte de 980 a 1080 : a 1024 la colonne principale tombait a 539px
+   et l'encart a 303px, galerie ecrasee et bouton sur deux lignes. */
+@media(max-width:1080px){
+  .r-body{grid-template-columns:1fr;gap:40px}
+  .r-aside{position:static;width:min(100%,420px);margin-inline:auto}
+}
+/* Les deux signatures des accompagnantes se calent sur la meme ligne de pied,
+   quel que soit le nombre de lignes de leur citation. */
+.persons .person{display:flex;flex-direction:column}
+.persons .person .sign{margin-top:auto}
+@media(max-width:980px){
+  /* 8 a 9 lignes centrees : l'oeil perd le debut de ligne. */
+  .persons .person p{text-align:left}
 }
 
 /* 2.6 · Cartes sejour — le ratio quitte le style inline pour pouvoir
@@ -691,7 +725,7 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 /* 2.7 · Carte livre de l'accueil : le recadrage assume du 20/08 vaut
    partout ou .offers est en grille, pas seulement sous 680. */
 @media(max-width:1080px){
-  .ocard .im.contain{aspect-ratio:4/3;background:linear-gradient(165deg,var(--bg-2) 0%,var(--rose) 260%)}
+  .ocard .im.contain{aspect-ratio:4/3;background:var(--bg-2)}
   .ocard .im.contain img{padding:16px}
 }
 
@@ -828,7 +862,9 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
    plus haut : ici, seulement la mise en page des cartes). */
 @media(max-width:820px){
   .band-carousel,.amz-carousel{padding:0 var(--pad)}
-  .band-track,.amz-track{align-items:flex-start}
+  /* .amz-track garde l'etirement : sans lui les cartes d'avis prenaient des
+     hauteurs differentes cote a cote (jusqu'a 64px d'ecart). */
+  .band-track{align-items:flex-start}
   .bq{
     padding:0;
     margin-right:20px;
@@ -897,6 +933,22 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
   .event .date .m{font-size:.84rem}
   .event .tag{font-size:.82rem}
   .r-sticky-bar .px small,.r-aside .price small{font-size:.84rem}
+}
+
+/* Une grille de 3 items passee en 2 colonnes laisse une cellule vide a cote
+   du dernier : sur cette plage on l'empile plutot que d'afficher le trou. */
+@media(min-width:681px) and (max-width:820px){
+  .principles:has(> :last-child:nth-child(3)),
+  .reviews:has(> :last-child:nth-child(3)){grid-template-columns:1fr}
+  /* Les titres blancs des cartes sejour tombaient sur la facade claire :
+     on densifie le voile existant, meme teinte, sans ombre (cf. regle 2.3). */
+  .cards.two .ucard .veil{background:linear-gradient(to top,rgba(43,30,23,.9),rgba(43,30,23,.5) 60%,rgba(43,30,23,.15))}
+}
+
+/* Titres en etroit : evite le mot (ou l'article) seul sur la derniere ligne,
+   la ou les <br> composes pour le desktop sont neutralises. */
+@media(max-width:820px){
+  h1,h2{text-wrap:balance}
 }
 
 /* 5.5 · Pied de page : la ligne qui deborde reste centree, le coeur
@@ -999,8 +1051,14 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
    (toute decoupe paysage traverse le titre compose dans l'image). */
 .ocard .im.contain.affiche{background:var(--bg-2)}
 .ocard .im.contain.affiche img{padding:14px;object-fit:contain}
-.split .col-media.ar-affiche{aspect-ratio:3/4;width:min(100%,420px);margin-inline:auto}
+/* L'affiche se cale sur la marge de la page (le reste de la colonne hangeait
+   48px plus a gauche) et partage sa ligne d'entree avec le texte. */
+.split .col-media.ar-affiche{aspect-ratio:3/4;width:min(100%,380px);margin-inline:0;align-self:start}
 .split .col-media.ar-affiche img{object-fit:cover}
+.split .col-media.ar-3-2{align-self:start}
+@media(max-width:980px){
+  .split .col-media.ar-affiche{width:min(100%,420px)}
+}
 /* le chapo garde sa composition hors de .prose (ici dans une colonne de .split) */
 .split .col-text p.stand{
   font-family:var(--serif);font-style:italic;
