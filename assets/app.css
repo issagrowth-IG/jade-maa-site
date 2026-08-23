@@ -950,6 +950,11 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 @media(max-width:820px){
   h1,h2{text-wrap:balance}
 }
+/* Corps de texte, a toutes les largeurs : text-wrap:pretty est fait pour ca,
+   il interdit le mot seul en derniere ligne. Sans lui, le chapo des pages
+   interieures enchainait jusqu'a trois paragraphes finissant sur « soi. ».
+   Le navigateur qui ne connait pas la valeur l'ignore, sans degat. */
+p,li,blockquote,figcaption,.lead{text-wrap:pretty}
 
 /* 5.5 · Pied de page : la ligne qui deborde reste centree, le coeur
    revient sur l'axe du texte. */
