@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=38">
+<link rel="stylesheet" href="assets/app.css?v=39">
 </head>
 <body>
 <div id="nav-mount"></div>
@@ -57,41 +57,43 @@
     <div class="sec-head">
       <span class="eyebrow reveal">Où et quand</span>
       <h2 class="reveal" data-d="1">Les prochaines <em>dates</em>.</h2>
-      <p class="reveal" data-d="2">Les inscriptions pour Lyon sont ouvertes. Pour les autres villes, inscrivez-vous pour recevoir les informations directement par mail et être prévenu(e) en priorité.</p>
+      <p class="reveal" data-d="2">Ces quatre dates sont toutes la conférence «&nbsp;Dans ma valise, il y a…&nbsp;». Cliquez sur une date pour découvrir la conférence et vous inscrire.</p>
     </div>
+    <!-- Chaque ligne mene a la page de la conference : on arrive sur ses infos,
+         et le formulaire plus bas a deja la bonne ville de selectionnee. -->
     <div class="events">
-      <div class="event reveal">
+      <a href="conference-dans-ma-valise.html?ville=lyon-07-nov" class="event reveal">
         <div class="date"><div class="d">07</div><div class="m">Nov. 2026</div></div>
         <div class="info">
           <h3>Lyon</h3>
           <div class="tags"><span class="tag">Inscriptions ouvertes</span><span class="tag">13h à 17h</span></div>
         </div>
-        <div class="actions"><a href="conference-dans-ma-valise.html?ville=lyon-07-nov#inscription" class="btn btn-dark">Je m'inscris</a></div>
-      </div>
-      <div class="event reveal" data-d="1">
+        <div class="actions"><span class="go">Je m'inscris →</span></div>
+      </a>
+      <a href="conference-dans-ma-valise.html?ville=marseille-05-dec" class="event reveal" data-d="1">
         <div class="date"><div class="d">05</div><div class="m">Déc. 2026</div></div>
         <div class="info">
           <h3>Marseille</h3>
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
-        <div class="actions"><a href="conference-dans-ma-valise.html?ville=marseille-05-dec#inscription" class="btn btn-ghost">Être prévenu(e)</a></div>
-      </div>
-      <div class="event reveal" data-d="2">
+        <div class="actions"><span class="go">Être prévenu(e) →</span></div>
+      </a>
+      <a href="conference-dans-ma-valise.html?ville=bruxelles-16-jan" class="event reveal" data-d="2">
         <div class="date"><div class="d">16</div><div class="m">Jan. 2027</div></div>
         <div class="info">
           <h3>Bruxelles</h3>
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
-        <div class="actions"><a href="conference-dans-ma-valise.html?ville=bruxelles-16-jan#inscription" class="btn btn-ghost">Être prévenu(e)</a></div>
-      </div>
-      <div class="event reveal" data-d="3" style="border-bottom:1px solid var(--line)">
+        <div class="actions"><span class="go">Être prévenu(e) →</span></div>
+      </a>
+      <a href="conference-dans-ma-valise.html?ville=lille-30-jan" class="event reveal" data-d="3" style="border-bottom:1px solid var(--line)">
         <div class="date"><div class="d">30</div><div class="m">Jan. 2027</div></div>
         <div class="info">
           <h3>Lille</h3>
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
-        <div class="actions"><a href="conference-dans-ma-valise.html?ville=lille-30-jan#inscription" class="btn btn-ghost">Être prévenu(e)</a></div>
-      </div>
+        <div class="actions"><span class="go">Être prévenu(e) →</span></div>
+      </a>
     </div>
   </div>
 </section>

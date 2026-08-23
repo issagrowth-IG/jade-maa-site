@@ -1052,6 +1052,14 @@ p,li,blockquote,figcaption,.lead{text-wrap:pretty}
 .form-err a{text-decoration:underline;text-underline-offset:3px}
 .form-ok h3:focus{outline:none}
 
+/* ---- Ligne de date cliquable (hub des evenements) -----------------------
+   Toute la ligne mene a la page de la conference : le libelle de droite est
+   donc un simple repere, pas un lien imbrique (interdit dans un <a>). */
+a.event{color:inherit}
+a.event .go{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);white-space:nowrap;display:inline-flex;gap:8px;transition:gap .3s var(--ease)}
+a.event:hover .go{gap:14px}
+@media(max-width:820px){a.event .go{font-size:.82rem}}
+
 /* ---- Carte a visuel de marque (sejours) ----------------------------------
    Le visuel fourni par Jade contient deja le titre et le monogramme : la carte
    ne rajoute donc aucun texte par-dessus, contrairement a .ucard. Le filet dore
