@@ -943,3 +943,34 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
   .page-hero .actions{flex-direction:column;align-items:stretch}
   .page-hero .actions .btn{justify-content:center}
 }
+
+/* ============================================================
+   AJOUTS — page conferences « Dans ma valise, il y a… » (23/08/2026)
+   ============================================================ */
+
+/* Compartiments : 4 colonnes desktop, 2 tablette, 1 telephone */
+.principles.four{grid-template-columns:repeat(4,1fr);gap:44px}
+@media(max-width:1080px){.principles.four{grid-template-columns:1fr 1fr;gap:44px 30px}}
+@media(max-width:680px){.principles.four{grid-template-columns:1fr;gap:34px}}
+
+/* Split media paysage (photo de salle 3:2), toutes largeurs */
+.split .col-media.ar-3-2{aspect-ratio:3/2}
+@media(max-width:980px){
+  .split .col-media.ar-3-2{width:min(100%,560px);margin-inline:auto}
+}
+
+/* Bande brune : la question finale en script */
+.proof .script-q{font-family:var(--script);font-weight:400;font-size:clamp(2.1rem,4.5vw,3rem);line-height:1.2;color:var(--rose);margin-top:30px}
+
+/* Formulaire d'inscription conference */
+.form.narrow{max-width:640px;margin:0 auto}
+.form .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+@media(max-width:680px){.form .duo{grid-template-columns:1fr}}
+.form .hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.form-ok{display:none;text-align:center;padding:22px 0 8px}
+.form-ok h3{font-family:var(--serif);font-weight:500;font-size:1.8rem;color:var(--titre);margin-bottom:12px}
+.form-ok p{color:var(--ink);max-width:440px;margin:0 auto}
+.form.is-done form{display:none}
+.form.is-done .form-ok{display:block}
+.form-err{display:none;text-align:center;font-size:.9rem;color:#8F3B2C;margin-top:14px}
+.form-err a{text-decoration:underline;text-underline-offset:3px}
