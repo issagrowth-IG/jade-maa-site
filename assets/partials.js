@@ -1,7 +1,19 @@
 /* Nav + Footer partagés — injectés pour rester DRY et cohérents */
 (function () {
-  const P = (location.pathname.split('/').pop() || 'index.html');
-  const active = (f) => P === f ? ' class="active-link" aria-current="page"' : '';
+  /* Cloudflare sert les URL sans .html (/retraites, pas /retraites.html) :
+     on compare donc des noms normalises, sinon la surbrillance ne s'allume
+     jamais en production. La rubrique reste allumee sur ses sous-pages. */
+  const nom = (s) => (s.split('/').pop() || 'index').replace(/\.html$/, '') || 'index';
+  const P = nom(location.pathname);
+  const SOUS_PAGES = {
+    'retraites': ['retraite-le-manoir', 'retraite-le-plessis'],
+    'evenements': ['conference-dans-ma-valise'],
+  };
+  const active = (f) => {
+    const cle = nom(f);
+    return (P === cle || (SOUS_PAGES[cle] || []).includes(P))
+      ? ' class="active-link"' + (P === cle ? ' aria-current="page"' : '') : '';
+  };
 
   const NAV = `
   <nav class="nav">
