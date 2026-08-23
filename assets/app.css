@@ -974,3 +974,11 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .form.is-done .form-ok{display:block}
 .form-err{display:none;text-align:center;font-size:.9rem;color:#8F3B2C;margin-top:14px}
 .form-err a{text-decoration:underline;text-underline-offset:3px}
+.form-ok h3:focus{outline:none}
+
+/* Barre sticky : tres petits ecrans, le bouton reste sur 1 ligne */
+@media(max-width:360px){
+  .r-sticky-bar{gap:10px}
+  .r-sticky-bar .btn{padding:12px 14px;letter-spacing:.1em;white-space:nowrap}
+  .r-sticky-bar .px{font-size:.95rem}
+}

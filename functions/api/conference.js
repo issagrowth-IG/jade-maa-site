@@ -10,12 +10,21 @@ const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 
 export async function onRequestPost({ request, env }) {
+  if (!env.GHL_PIT || !env.GHL_LOCATION_ID) {
+    console.error('conference: env GHL manquante');
+    return json({ ok: false, error: 'config' }, 500);
+  }
+
   let d;
   try { d = await request.json(); } catch { return json({ ok: false, error: 'corps' }, 400); }
   if (typeof d !== 'object' || d === null) return json({ ok: false, error: 'corps' }, 400);
 
   // Honeypot : un bot qui remplit « website » reçoit un faux succès.
-  if (String(d.website ?? '').trim() !== '') return json({ ok: true });
+  // Loggé pour rendre visibles d'éventuels faux positifs (autofill agressif).
+  if (String(d.website ?? '').trim() !== '') {
+    console.log('conference: honeypot déclenché');
+    return json({ ok: true });
+  }
 
   const s = v => (v == null ? '' : String(v)).trim().slice(0, 120);
   const prenom = s(d.prenom), nom = s(d.nom), tel = s(d.tel);
@@ -41,21 +50,34 @@ export async function onRequestPost({ request, env }) {
     source: 'Site jade-maa.com · Conférence « Dans ma valise, il y a… »',
   };
 
-  let up = await fetch(`${GHL}/contacts/upsert`, { method: 'POST', headers, body: JSON.stringify(body) });
+  let up;
+  try {
+    up = await fetch(`${GHL}/contacts/upsert`, { method: 'POST', headers, body: JSON.stringify(body) });
+    if (!up.ok) {
+      // Si GHL refuse le numéro tel quel, on sauve quand même le lead sans téléphone.
+      const { phone, ...sansTel } = body;
+      up = await fetch(`${GHL}/contacts/upsert`, { method: 'POST', headers, body: JSON.stringify(sansTel) });
+    }
+  } catch (e) {
+    console.error('conference: GHL injoignable', e && e.message);
+    return json({ ok: false, error: 'crm' }, 502);
+  }
   if (!up.ok) {
-    // Si GHL refuse le numéro tel quel, on sauve quand même le lead sans téléphone.
-    const { phone, ...sansTel } = body;
-    up = await fetch(`${GHL}/contacts/upsert`, { method: 'POST', headers, body: JSON.stringify(sansTel) });
-    if (!up.ok) return json({ ok: false, error: 'crm' }, 502);
+    console.error('conference: upsert refusé', up.status, await up.text().catch(() => ''));
+    return json({ ok: false, error: 'crm' }, 502);
   }
 
   const data = await up.json().catch(() => null);
   const id = data && data.contact && data.contact.id;
   if (id) {
     const tag = ville === 'lyon-07-nov' ? 'conf-lyon-07-nov-inscrit' : `conf-${ville}-a-prevenir`;
-    await fetch(`${GHL}/contacts/${id}/tags`, {
+    const tr = await fetch(`${GHL}/contacts/${id}/tags`, {
       method: 'POST', headers, body: JSON.stringify({ tags: ['conference-valise', tag] }),
-    }).catch(() => {});
+    }).catch(() => null);
+    // Le contact est sauvé même si le tag échoue : on trace pour pouvoir le voir.
+    if (!tr || !tr.ok) console.error('conference: tags non posés', tr && tr.status);
+  } else {
+    console.error('conference: upsert sans id de contact');
   }
 
   return json({ ok: true });
