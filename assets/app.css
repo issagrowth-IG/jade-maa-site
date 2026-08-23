@@ -976,6 +976,19 @@ footer{background:var(--bg);padding:90px var(--pad) 46px;border-top:1px solid va
 .form-err a{text-decoration:underline;text-underline-offset:3px}
 .form-ok h3:focus{outline:none}
 
+/* Affiche de la conference : format d'origine conserve, jamais recadree
+   (toute decoupe paysage traverse le titre compose dans l'image). */
+.ocard .im.contain.affiche{background:var(--bg-2)}
+.ocard .im.contain.affiche img{padding:14px;object-fit:contain}
+.split .col-media.ar-affiche{aspect-ratio:3/4;width:min(100%,420px);margin-inline:auto}
+.split .col-media.ar-affiche img{object-fit:cover}
+/* le chapo garde sa composition hors de .prose (ici dans une colonne de .split) */
+.split .col-text p.stand{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.3rem,2.5vw,1.85rem);line-height:1.45;
+  color:var(--titre);margin:0 0 26px;max-width:none;
+}
+
 /* Barre sticky : tres petits ecrans, le bouton reste sur 1 ligne */
 @media(max-width:360px){
   .r-sticky-bar{gap:10px}
