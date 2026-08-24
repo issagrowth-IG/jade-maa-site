@@ -34,7 +34,7 @@
       <p class="reveal" data-d="3">Mais que contient vraiment notre valise&nbsp;? Et surtout&nbsp;: <em>comment apprendre à mieux vivre avec tout ce qu'elle contient&nbsp;?</em></p>
     </div>
     <div class="actions reveal" data-d="3" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:38px">
-      <a href="https://buy.stripe.com/fZu5kCgJHagk2k776a0oM0g" class="btn btn-dark">Je réserve ma place · Lyon</a>
+      <a href="#paiement" class="btn btn-dark">Je réserve ma place · Lyon</a>
       <a href="#dates" class="btn btn-ghost">Voir les prochaines dates</a>
     </div>
   </div>
@@ -140,7 +140,7 @@
           <li>De 13h à 17h</li>
           <li>Places limitées</li>
         </ul>
-        <p class="reveal" data-d="3" style="margin-top:30px"><a href="https://buy.stripe.com/fZu5kCgJHagk2k776a0oM0g" class="btn btn-dark">Je réserve ma place · 69 €</a></p>
+        <p class="reveal" data-d="3" style="margin-top:30px"><a href="#paiement" class="btn btn-dark">Je réserve ma place · 69 €</a></p>
       </div>
     </div>
 
@@ -174,13 +174,39 @@
   </div>
 </section>
 
-<!-- INSCRIPTION -->
+<!-- PAIEMENT / RÉSERVATION LYON (checkout intégré, le client reste sur le site) -->
+<section class="section" id="paiement" style="padding-top:110px">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow reveal">Réserver · Lyon</span>
+      <h2 class="reveal" data-d="1">Réservez <br>votre <em>place</em>.</h2>
+      <p class="reveal" data-d="2">Samedi 7 novembre, de 13h à 17h, à l'Hôtel &amp; Spa de Chassieu (Lyon Est). Les places sont limitées. Le paiement se fait directement ci-dessous, en toute sécurité.</p>
+    </div>
+    <div class="pay-wrap reveal" data-d="2">
+      <aside class="pay-summary">
+        <div class="pay-price">69&nbsp;€ <small>/ personne</small></div>
+        <ul>
+          <li>Conférence «&nbsp;Dans ma valise, il y a…&nbsp;»</li>
+          <li>Samedi 7 novembre · 13h – 17h</li>
+          <li>Hôtel &amp; Spa de Chassieu · Lyon Est</li>
+          <li>Confirmation et informations envoyées par email</li>
+        </ul>
+        <p class="fineprint">Paiement sécurisé par Stripe. Une question&nbsp;? <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>.</p>
+      </aside>
+      <div class="pay-checkout">
+        <div id="checkout"><div class="pay-loading">Chargement du paiement sécurisé…</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÊTRE PRÉVENU(E) — autres villes -->
 <section class="section alt" id="inscription" style="padding-top:110px">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow reveal">Inscription</span>
-      <h2 class="reveal" data-d="1">Réservez <br>votre <em>place</em>.</h2>
-      <p class="reveal" data-d="2">Les inscriptions pour Lyon sont ouvertes. Vous souhaitez être informé(e) de l'ouverture des inscriptions et des prochaines dates&nbsp;? Inscrivez-vous pour recevoir les informations directement par mail et être prévenu(e) en priorité.</p>
+      <span class="eyebrow reveal">Autres dates</span>
+      <h2 class="reveal" data-d="1">Une autre ville&nbsp;? <br>Soyez <em>prévenu(e)</em>.</h2>
+      <p class="reveal" data-d="2">Marseille, Bruxelles, Lille&hellip; Les inscriptions ouvriront prochainement. Inscrivez-vous pour recevoir les informations directement par mail et être prévenu(e) en priorité dès l'ouverture.</p>
     </div>
     <div class="form narrow reveal" id="reserver">
       <form id="conf-form" novalidate>
@@ -203,20 +229,19 @@
           <input id="cf-tel" name="tel" type="tel" autocomplete="tel" required pattern="(?:[^0-9]*[0-9]){8,}[^0-9]*" title="Au moins 8 chiffres">
         </div>
         <div class="field">
-          <label for="cf-ville">Je m'inscris pour *</label>
+          <label for="cf-ville">Je souhaite être prévenu(e) pour *</label>
           <select id="cf-ville" name="ville" required>
-            <option value="lyon-07-nov" selected>Lyon · 07 novembre</option>
             <option value="marseille-05-dec">Marseille · 05 décembre</option>
             <option value="bruxelles-16-jan">Bruxelles · 16 janvier</option>
             <option value="lille-30-jan">Lille · 30 janvier</option>
-            <option value="toutes-dates">Toutes les prochaines dates</option>
+            <option value="toutes-dates" selected>Toutes les prochaines dates</option>
           </select>
         </div>
         <div class="hp-field" aria-hidden="true">
           <label for="cf-website">Site web</label>
           <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
         </div>
-        <button type="submit" class="btn">Je m'inscris</button>
+        <button type="submit" class="btn">Être prévenu(e)</button>
         <p class="form-err" role="alert"><span id="cf-err-msg">Une erreur est survenue, votre inscription n'a pas été enregistrée.</span> <span id="cf-err-retry">Réessayez dans un instant, ou <a href="https://wa.me/33699023187" target="_blank" rel="noopener">écrivez-nous sur WhatsApp</a>.</span></p>
         <p class="fineprint">Vos informations restent confidentielles et servent uniquement à l'organisation des événements. <a href="politique-de-confidentialite.html" style="text-decoration:underline;text-underline-offset:3px">Politique de confidentialité</a></p>
       </form>
@@ -304,6 +329,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+</script>
+
+<!-- PAIEMENT INTÉGRÉ — Stripe Embedded Checkout -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function(){
+  var STRIPE_PK = 'pk_live_51SoctOBzUtKi0psW6oexrpuq4Qbl0TQm8lEVIHCfN0S4GnE41o50czfPTKfFFHepKuQL4FtBG9K4S8o19P46VHHR00itLmrTVg'; // clé publique Stripe (non secrète)
+  var mountEl = document.getElementById('checkout');
+  var section = document.getElementById('paiement');
+  if(!mountEl || !section || typeof Stripe === 'undefined') return;
+  var started = false;
+  function fail(){ mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> pour réserver.</p>'; }
+  async function start(){
+    if(started) return; started = true;
+    if(!STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ fail(); return; }
+    try{
+      var stripe = Stripe(STRIPE_PK);
+      var checkout = await stripe.initEmbeddedCheckout({
+        fetchClientSecret: async function(){
+          var r = await fetch('/api/create-checkout-session', { method:'POST' });
+          var d = await r.json();
+          if(!r.ok || !d.clientSecret) throw new Error('no secret');
+          return d.clientSecret;
+        }
+      });
+      mountEl.innerHTML = '';
+      checkout.mount('#checkout');
+    }catch(e){ started = false; fail(); }
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ start(); io.disconnect(); } });
+    }, { rootMargin: '400px' });
+    io.observe(section);
+  } else { start(); }
+})();
 </script>
 </body>
 </html>
