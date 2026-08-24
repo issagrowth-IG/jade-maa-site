@@ -5,6 +5,8 @@
    confirmation (mail éditable dans GHL).
    Env : STRIPE_WEBHOOK_SECRET (whsec_…), GHL_PIT, GHL_LOCATION_ID. */
 
+import { SUBJECT, HTML } from './_conf-email.js';
+
 const GHL = 'https://services.leadconnectorhq.com';
 
 // Clé (payment_link OU metadata.event du checkout intégré) → tag GHL. Une ligne par événement payant.
@@ -99,7 +101,20 @@ export async function onRequestPost({ request, env }) {
   }).catch(() => null);
   if (!tr || !tr.ok) {
     console.error('stripe-webhook: tag non posé', tr && tr.status);
-    return json({ error: 'tag' }, 502); // le tag déclenche le mail → on veut qu'il passe
+    return json({ error: 'tag' }, 502); // pas encore de mail envoyé → Stripe peut réessayer sans doublon
+  }
+
+  // Mail de confirmation envoyé par GHL. Best-effort : un échec ne fait pas réessayer
+  // Stripe (sinon on risquerait un doublon d'email), il est seulement journalisé.
+  try {
+    const em = await fetch(`${GHL}/conversations/messages`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${env.GHL_PIT}`, Version: '2021-04-15', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'Email', contactId: id, subject: SUBJECT, html: HTML }),
+    });
+    if (!em.ok) console.error('stripe-webhook: email GHL refusé', em.status, await em.text().catch(() => ''));
+  } catch (e) {
+    console.error('stripe-webhook: email GHL injoignable', e && e.message);
   }
 
   return json({ received: true, tagged: tag });
