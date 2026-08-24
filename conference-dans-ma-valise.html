@@ -152,7 +152,6 @@
           <h3>Marseille</h3>
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
-        <div class="actions"><a href="#inscription" class="btn btn-ghost" data-ville="marseille-05-dec">Être prévenu(e)</a></div>
       </div>
       <div class="event reveal" data-d="1">
         <div class="date"><div class="d">16</div><div class="m">Jan. 2027</div></div>
@@ -160,7 +159,6 @@
           <h3>Bruxelles</h3>
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
-        <div class="actions"><a href="#inscription" class="btn btn-ghost" data-ville="bruxelles-16-jan">Être prévenu(e)</a></div>
       </div>
       <div class="event reveal" data-d="2" style="border-bottom:1px solid var(--line)">
         <div class="date"><div class="d">30</div><div class="m">Jan. 2027</div></div>
@@ -168,65 +166,11 @@
           <h3>Lille</h3>
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
-        <div class="actions"><a href="#inscription" class="btn btn-ghost" data-ville="lille-30-jan">Être prévenu(e)</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ÊTRE PRÉVENU(E) — autres villes -->
-<section class="section alt" id="inscription" style="padding-top:110px">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow reveal">Autres dates</span>
-      <h2 class="reveal" data-d="1">Une autre ville&nbsp;? <br>Soyez <em>prévenu(e)</em>.</h2>
-      <p class="reveal" data-d="2">Marseille, Bruxelles, Lille&hellip; Les inscriptions ouvriront prochainement. Inscrivez-vous pour recevoir les informations directement par mail et être prévenu(e) en priorité dès l'ouverture.</p>
-    </div>
-    <div class="form narrow reveal" id="reserver">
-      <form id="conf-form" novalidate>
-        <div class="duo">
-          <div class="field">
-            <label for="cf-prenom">Prénom *</label>
-            <input id="cf-prenom" name="prenom" type="text" autocomplete="given-name" required>
-          </div>
-          <div class="field">
-            <label for="cf-nom">Nom *</label>
-            <input id="cf-nom" name="nom" type="text" autocomplete="family-name" required>
-          </div>
-        </div>
-        <div class="field">
-          <label for="cf-email">Adresse email *</label>
-          <input id="cf-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="cf-tel">Numéro de téléphone *</label>
-          <input id="cf-tel" name="tel" type="tel" autocomplete="tel" required pattern="(?:[^0-9]*[0-9]){8,}[^0-9]*" title="Au moins 8 chiffres">
-        </div>
-        <div class="field">
-          <label for="cf-ville">Je souhaite être prévenu(e) pour *</label>
-          <select id="cf-ville" name="ville" required>
-            <option value="marseille-05-dec">Marseille · 05 décembre</option>
-            <option value="bruxelles-16-jan">Bruxelles · 16 janvier</option>
-            <option value="lille-30-jan">Lille · 30 janvier</option>
-            <option value="toutes-dates" selected>Toutes les prochaines dates</option>
-          </select>
-        </div>
-        <div class="hp-field" aria-hidden="true">
-          <label for="cf-website">Site web</label>
-          <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
-        </div>
-        <button type="submit" class="btn">Être prévenu(e)</button>
-        <p class="form-err" role="alert"><span id="cf-err-msg">Une erreur est survenue, votre inscription n'a pas été enregistrée.</span> <span id="cf-err-retry">Réessayez dans un instant, ou <a href="https://wa.me/33699023187" target="_blank" rel="noopener">écrivez-nous sur WhatsApp</a>.</span></p>
-        <p class="fineprint">Vos informations restent confidentielles et servent uniquement à l'organisation des événements. <a href="politique-de-confidentialite.html" style="text-decoration:underline;text-underline-offset:3px">Politique de confidentialité</a></p>
-      </form>
-      <div class="form-ok" role="status">
-        <h3 tabindex="-1">Merci ✦</h3>
-        <p class="ok-lyon">Votre inscription pour la conférence de Lyon est bien enregistrée. Vous recevrez toutes les informations par email.</p>
-        <p class="ok-autres" style="display:none">C'est noté. Vous serez prévenu(e) en priorité, directement par mail, dès l'ouverture des inscriptions.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- RETOUR AU HUB -->
 <section class="news">
@@ -242,67 +186,11 @@
 <!-- Barre CTA mobile -->
 <div class="r-sticky-bar">
   <div class="px">Lyon · 07 novembre<br><small>13h à 17h · places limitées</small></div>
-  <a href="#inscription" class="btn" data-ville="lyon-07-nov">Je m'inscris</a>
+  <a href="conference-lyon.html" class="btn">Je m'inscris</a>
 </div>
 
 <div id="footer-mount"></div>
 <script src="assets/partials.js"></script>
 <script src="assets/app.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const box = document.getElementById('reserver');
-  const form = document.getElementById('conf-form');
-  const sel = document.getElementById('cf-ville');
-  if (!box || !form || !sel) return;
-
-  // Les boutons de date pré-remplissent la ville avant de scroller au formulaire.
-  document.querySelectorAll('a[data-ville]').forEach(a => {
-    a.addEventListener('click', () => { sel.value = a.dataset.ville; });
-  });
-
-  // Même chose quand on arrive depuis la page des événements : evenements.html
-  // passe la ville en paramètre (?ville=marseille-05-dec#inscription).
-  const voulue = new URLSearchParams(location.search).get('ville');
-  if (voulue && [...sel.options].some(o => o.value === voulue)) sel.value = voulue;
-
-  const err = form.querySelector('.form-err');
-  const errMsg = document.getElementById('cf-err-msg');
-  const errRetry = document.getElementById('cf-err-retry');
-  const MSG_400 = {
-    email: 'Vérifiez votre adresse email, elle ne semble pas valide.',
-    tel: 'Vérifiez votre numéro de téléphone, il ne semble pas valide.',
-    champs: 'Merci de remplir tous les champs du formulaire.',
-  };
-  form.addEventListener('submit', async (ev) => {
-    ev.preventDefault();
-    if (!form.reportValidity()) return;
-    const btn = form.querySelector('button[type="submit"]');
-    const initial = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Un instant…';
-    err.style.display = 'none';
-    try {
-      const r = await fetch('/api/conference', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
-      });
-      const j = await r.json().catch(() => ({}));
-      if (!r.ok || !j.ok) { const e = new Error('api'); e.code = r.status === 400 ? j.error : null; throw e; }
-      const lyon = sel.value === 'lyon-07-nov';
-      box.querySelector('.ok-lyon').style.display = lyon ? 'block' : 'none';
-      box.querySelector('.ok-autres').style.display = lyon ? 'none' : 'block';
-      box.classList.add('is-done');
-      box.querySelector('.form-ok h3').focus();
-    } catch (e) {
-      // Un 400 est une donnée à corriger, pas une panne : message ciblé, sans « réessayez ».
-      const cible = e && e.code && MSG_400[e.code];
-      errMsg.textContent = cible || 'Une erreur est survenue, votre inscription n\'a pas été enregistrée.';
-      errRetry.style.display = cible ? 'none' : 'inline';
-      err.style.display = 'block';
-      btn.disabled = false; btn.textContent = initial;
-    }
-  });
-});
-</script>
 </body>
 </html>
