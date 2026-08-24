@@ -66,7 +66,8 @@ export async function onRequestPost({ request, env }) {
   const lastName = sp === -1 ? '' : full.slice(sp + 1);
   if (!email) { console.error('stripe-webhook: session sans email'); return json({ received: true }); }
 
-  const tag = EVENT_TAGS[s.payment_link] || 'conference-valise-paye';
+  const eventKey = s.payment_link || (s.metadata && s.metadata.event) || '';
+  const tag = EVENT_TAGS[eventKey] || 'conference-valise-paye';
 
   const headers = { Authorization: `Bearer ${env.GHL_PIT}`, Version: '2021-07-28', 'Content-Type': 'application/json' };
   const body = {
