@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=42">
+<link rel="stylesheet" href="assets/app.css?v=43">
 </head>
 <body class="home">
 
@@ -193,7 +193,34 @@
 
 <!-- FOOTER --><div id="footer-mount"></div>
 
+<!-- TOAST ANNONCES (accueil) -->
+<div class="toast" id="homeToast" hidden>
+  <button class="toast__x" data-close aria-label="Fermer">&times;</button>
+  <span class="toast__tag"><span class="dot"></span>Annonces</span>
+  <div class="toast__title">À ne pas manquer</div>
+  <a class="toast__item" href="la-bonne-methode.html">
+    <div class="d">Cohorte · 14 septembre 2026</div>
+    <div class="t">La Bonne Méthode</div>
+    <span class="go">Rejoindre la liste d'attente →</span>
+  </a>
+  <a class="toast__item" href="conference-dans-ma-valise.html?ville=lyon-07-nov#inscription">
+    <div class="d">Conférence · 7 novembre · Lyon</div>
+    <div class="t">Dans ma valise, il y a…</div>
+    <span class="go">Je m'inscris →</span>
+  </a>
+</div>
+
 <script src="assets/partials.js"></script>
 <script src="assets/app.js"></script>
+<script>
+(function(){
+  var t=document.getElementById('homeToast'); if(!t) return;
+  var KEY='home-toast-v1';
+  var seen=null; try{seen=sessionStorage.getItem(KEY);}catch(e){}
+  function close(){ t.classList.remove('show'); try{sessionStorage.setItem(KEY,'1');}catch(e){} setTimeout(function(){t.hidden=true;},500); }
+  if(!seen){ setTimeout(function(){ t.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ t.classList.add('show'); }); }); }, 1300); }
+  t.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')){ e.preventDefault(); close(); } });
+})();
+</script>
 </body>
 </html>
