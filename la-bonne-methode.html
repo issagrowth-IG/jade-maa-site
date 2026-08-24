@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=43">
+<link rel="stylesheet" href="assets/app.css?v=44">
 </head>
 <body>
 <div id="nav-mount"></div>
@@ -30,7 +30,7 @@
           <a href="https://go.jade-maa.com/optin" target="_blank" rel="noopener" class="btn btn-dark">Rejoindre la liste d'attente</a>
           <a href="#parcours" class="btn btn-ghost">Le parcours</a>
         </div>
-        <div class="reveal" data-d="4"><span class="cohorte-badge"><span class="dot"></span>Prochaine cohorte&nbsp;: <b>14 septembre 2026</b> · places limitées</span></div>
+        <div class="reveal" data-d="4"><span class="session-badge"><span class="dot"></span>Prochaine session&nbsp;: <b>14 septembre 2026</b> · places limitées</span></div>
       </div>
       <div class="lbm-hero-media reveal" data-d="2">
         <img src="assets/images/jade-portrait.jpg" width="1280" height="720" decoding="async" fetchpriority="high" alt="Jade Maa, fondatrice de La Bonne Méthode">
@@ -150,7 +150,7 @@
       </div>
       <div class="col-text">
         <div class="principle reveal" style="border-top:1px solid var(--line)"><div class="n">Durée</div><h3>3 mois</h3><p>Un parcours complet, du premier au dernier jour.</p></div>
-        <div class="principle reveal" data-d="1"><div class="n">Format</div><h3>Une cohorte fermée</h3><p>Le groupe démarre ensemble et avance ensemble.</p></div>
+        <div class="principle reveal" data-d="1"><div class="n">Format</div><h3>Une session fermée</h3><p>Le groupe démarre ensemble et avance ensemble.</p></div>
         <div class="principle reveal" data-d="2"><div class="n">Cadre</div><h3>Des ateliers structurés à l'avance</h3><p>Vous savez exactement où vous allez, dès le départ.</p></div>
         <div class="principle reveal" data-d="3"><div class="n">Suivi</div><h3>Une coach dédiée</h3><p>Elle vous accompagne tout au long du chemin.</p></div>
       </div>
@@ -242,7 +242,7 @@
       <h2 class="reveal" data-d="1">Vos questions, <em>nos réponses</em>.</h2>
     </div>
     <div class="faq reveal">
-      <details class="qa"><summary>Combien de temps dure La Bonne Méthode ?<span class="ic"></span></summary><div class="a">L'accompagnement dure trois mois, au sein d'une cohorte fermée qui démarre et avance ensemble.</div></details>
+      <details class="qa"><summary>Combien de temps dure La Bonne Méthode ?<span class="ic"></span></summary><div class="a">L'accompagnement dure trois mois, au sein d'une session fermée qui démarre et avance ensemble.</div></details>
       <details class="qa"><summary>Est-ce uniquement pour les personnes en dépendance affective ?<span class="ic"></span></summary><div class="a">Non. La dépendance affective et les relations peuvent faire partie des problématiques travaillées, mais La Bonne Méthode s'adresse plus largement à toute personne qui souhaite mieux se comprendre, sortir de certains schémas, retrouver confiance en elle, être davantage alignée avec ses besoins et construire une vie qui lui ressemble.</div></details>
       <details class="qa"><summary>Faut-il être célibataire ?<span class="ic"></span></summary><div class="a">Non. La Bonne Méthode s'adresse aussi bien aux personnes célibataires qu'aux personnes en couple. Le sujet central n'est pas votre statut amoureux. C'est votre relation à vous-même.</div></details>
       <details class="qa"><summary>Y a-t-il un accompagnement individuel ?<span class="ic"></span></summary><div class="a">Oui. Chaque participant(e) est accompagné(e) individuellement par une coach formée par Jade pendant les trois mois, en complément de la dynamique de groupe.</div></details>
@@ -263,14 +263,14 @@
   </div>
 </section>
 
-<!-- POP-UP ANNONCE COHORTE -->
+<!-- POP-UP ANNONCE SESSION -->
 <div class="pop" id="lbmPop" hidden>
   <div class="pop__ov" data-close></div>
   <div class="pop__card" role="dialog" aria-modal="true" aria-labelledby="lbmPopTitle">
     <span class="pop__tag"><span class="dot"></span>Annonce</span>
     <button class="pop__x" data-close aria-label="Fermer">&times;</button>
     <span class="pop__eb">La Bonne Méthode</span>
-    <h3 id="lbmPopTitle">Prochaine cohorte<br>le <em>14 septembre</em>.</h3>
+    <h3 id="lbmPopTitle">Prochaine session<br>le <em>14 septembre</em>.</h3>
     <p>Les places sont limitées et les inscriptions ouvrent bientôt. Rejoignez la liste d'attente pour être prévenu(e) en priorité, avant tout le monde.</p>
     <a href="https://go.jade-maa.com/optin" target="_blank" rel="noopener" class="btn btn-dark">Rejoindre la liste d'attente</a>
   </div>
@@ -282,7 +282,7 @@
 <script>
 (function(){
   var pop=document.getElementById('lbmPop'); if(!pop) return;
-  var KEY='lbm-pop-cohorte-14sept';
+  var KEY='lbm-pop-session-14sept';
   var seen=null; try{seen=sessionStorage.getItem(KEY);}catch(e){}
   function open(){ pop.hidden=false; document.body.style.overflow='hidden'; }
   function close(){ pop.hidden=true; document.body.style.overflow=''; try{sessionStorage.setItem(KEY,'1');}catch(e){} }

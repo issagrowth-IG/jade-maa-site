@@ -319,8 +319,8 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 @keyframes popFade{from{opacity:0}to{opacity:1}}
 @keyframes popDrop{from{opacity:0;transform:translateY(-34px)}to{opacity:1;transform:translateY(0)}}
 /* Badge date reutilisable dans un hero */
-.cohorte-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.82rem;letter-spacing:.02em;color:var(--brun);background:var(--bg-2);border:1px solid var(--line);border-radius:100px;padding:8px 16px;margin-top:22px}
-.cohorte-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--terra);flex-shrink:0}
+.session-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.82rem;letter-spacing:.02em;color:var(--brun);background:var(--bg-2);border:1px solid var(--line);border-radius:100px;padding:8px 16px;margin-top:22px}
+.session-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--terra);flex-shrink:0}
 @media(prefers-reduced-motion:reduce){.pop__card,.pop__ov{animation:none}}
 /* Hero LBM en deux colonnes : texte + portrait */
 .lbm-hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
