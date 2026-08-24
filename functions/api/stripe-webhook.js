@@ -7,9 +7,10 @@
 
 const GHL = 'https://services.leadconnectorhq.com';
 
-// payment_link Stripe → tag GHL de l'événement. Ajouter une ligne par nouvel événement payant.
+// Clé (payment_link OU metadata.event du checkout intégré) → tag GHL. Une ligne par événement payant.
 const EVENT_TAGS = {
-  'plink_1U80kwBzUtKi0psW96QQPCyB': 'conf-lyon-07-nov-paye',
+  'plink_1U80kwBzUtKi0psW96QQPCyB': 'conf-lyon-07-nov-paye', // Payment Link (fallback)
+  'conf-lyon-07-nov': 'conf-lyon-07-nov-paye',               // checkout intégré (metadata.event)
 };
 
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { 'Content-Type': 'application/json' } });
