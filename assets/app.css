@@ -300,6 +300,35 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .r-meta{display:flex;gap:26px;flex-wrap:wrap;font-size:.9rem;color:var(--brun);margin-top:26px}
 .r-meta span{display:inline-flex;align-items:center;gap:7px}
 .r-meta .meta-ico{width:17px;height:17px;fill:var(--terra);flex-shrink:0}
+/* Pop-up d'annonce reutilisable (LBM, Evenements...) — badge « Annonce » haut gauche */
+.pop[hidden]{display:none}
+.pop{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:22px}
+.pop__ov{position:absolute;inset:0;background:rgba(43,30,23,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:popFade .3s ease}
+.pop__card{position:relative;max-width:452px;width:100%;background:#FFFEFC;border:1px solid var(--line);border-radius:12px;padding:58px 40px 40px;text-align:center;box-shadow:0 30px 80px -28px rgba(60,40,30,.5);animation:popDrop .55s cubic-bezier(.2,.85,.25,1)}
+.pop__tag{position:absolute;top:15px;left:16px;display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);border:1px solid var(--terra);border-radius:5px;padding:5px 9px 4px}
+.pop__tag .dot{width:5px;height:5px;border-radius:50%;background:var(--terra)}
+.pop__x{position:absolute;top:11px;right:14px;background:none;border:none;font-size:1.7rem;line-height:1;color:#B0A399;cursor:pointer;padding:6px}
+.pop__x:hover{color:var(--brun)}
+.pop__eb{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--terra);margin-bottom:15px}
+.pop__card h3{font-family:var(--serif);font-weight:400;font-size:2.3rem;line-height:1.08;color:var(--titre);margin:0 0 15px}
+.pop__card h3 em{font-style:italic;color:var(--brun)}
+.pop__card p{font-family:var(--sans);font-size:.97rem;line-height:1.7;color:#575757;margin:0 0 24px}
+.pop__card .btn{width:100%}
+.pop__note{display:block;margin-top:14px;font-size:.82rem;color:var(--brun)}
+.pop__note a{color:var(--brun);text-decoration:underline}
+@keyframes popFade{from{opacity:0}to{opacity:1}}
+@keyframes popDrop{from{opacity:0;transform:translateY(-34px)}to{opacity:1;transform:translateY(0)}}
+/* Badge date reutilisable dans un hero */
+.cohorte-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.82rem;letter-spacing:.02em;color:var(--brun);background:var(--bg-2);border:1px solid var(--line);border-radius:100px;padding:8px 16px;margin-top:22px}
+.cohorte-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--terra);flex-shrink:0}
+@media(prefers-reduced-motion:reduce){.pop__card,.pop__ov{animation:none}}
+/* Hero LBM en deux colonnes : texte + portrait */
+.lbm-hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
+.lbm-hero-text{min-width:0}
+.lbm-hero-text .hero-text{max-width:none}
+.lbm-hero-media{border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:var(--bg-2);box-shadow:0 26px 64px -34px rgba(60,40,30,.5)}
+.lbm-hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block}
+@media(max-width:860px){.lbm-hero-grid{grid-template-columns:1fr;gap:30px}.lbm-hero-media{aspect-ratio:16/11;max-height:440px}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .r-body{display:grid;grid-template-columns:1.6fr .9fr;gap:70px;align-items:start}
 .r-main h2{font-family:var(--serif);font-weight:400;font-size:2rem;color:var(--titre);margin:44px 0 18px}

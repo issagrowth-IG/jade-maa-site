@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=41">
+<link rel="stylesheet" href="assets/app.css?v=42">
 </head>
 <body>
 <div id="nav-mount"></div>
@@ -16,17 +16,25 @@
 <!-- HERO -->
 <section class="page-hero">
   <div class="wrap">
-    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> › La Bonne Méthode</div>
-    <span class="eyebrow reveal" data-d="1" style="display:block;margin-top:14px">L'accompagnement</span>
-    <h1 class="reveal" data-d="1">La Bonne <em>Méthode</em>.</h1>
-    <div class="hero-text">
-      <p class="lead reveal" data-d="2">Et si le problème n'était pas de devenir quelqu'un d'autre, mais enfin de devenir pleinement soi ?</p>
-      <p class="reveal" data-d="2">La Bonne Méthode est un accompagnement de 3 mois en petit groupe pour celles et ceux qui sentent qu'ils tournent en rond, se répètent, s'oublient ou ne savent plus très bien quelle direction prendre.</p>
-      <p class="reveal" data-d="3">Relations, dépendance affective, confiance en soi, hypersensibilité, solitude, besoin de reconnaissance, peur de l'abandon, manque de sens… Les problématiques peuvent être différentes. Mais derrière elles se cache souvent une même question : comment apprendre à vivre une vie qui nous ressemble vraiment ?</p>
-    </div>
-    <div class="actions reveal" data-d="3" style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap">
-      <a href="https://go.jade-maa.com/optin" target="_blank" rel="noopener" class="btn btn-dark">Rejoindre la liste d'attente</a>
-      <a href="#parcours" class="btn btn-ghost">Le parcours</a>
+    <div class="lbm-hero-grid">
+      <div class="lbm-hero-text">
+        <div class="breadcrumb reveal"><a href="index.html">Accueil</a> › La Bonne Méthode</div>
+        <span class="eyebrow reveal" data-d="1" style="display:block;margin-top:14px">L'accompagnement</span>
+        <h1 class="reveal" data-d="1">La Bonne <em>Méthode</em>.</h1>
+        <div class="hero-text">
+          <p class="lead reveal" data-d="2">Et si le problème n'était pas de devenir quelqu'un d'autre, mais enfin de devenir pleinement soi ?</p>
+          <p class="reveal" data-d="2">La Bonne Méthode est un accompagnement de 3 mois en petit groupe pour celles et ceux qui sentent qu'ils tournent en rond, se répètent, s'oublient ou ne savent plus très bien quelle direction prendre.</p>
+          <p class="reveal" data-d="3">Relations, dépendance affective, confiance en soi, hypersensibilité, solitude, besoin de reconnaissance, peur de l'abandon, manque de sens… Les problématiques peuvent être différentes. Mais derrière elles se cache souvent une même question : comment apprendre à vivre une vie qui nous ressemble vraiment ?</p>
+        </div>
+        <div class="actions reveal" data-d="3" style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap">
+          <a href="https://go.jade-maa.com/optin" target="_blank" rel="noopener" class="btn btn-dark">Rejoindre la liste d'attente</a>
+          <a href="#parcours" class="btn btn-ghost">Le parcours</a>
+        </div>
+        <div class="reveal" data-d="4"><span class="cohorte-badge"><span class="dot"></span>Prochaine cohorte&nbsp;: <b>14 septembre 2026</b> · places limitées</span></div>
+      </div>
+      <div class="lbm-hero-media reveal" data-d="2">
+        <img src="assets/images/jade-portrait.jpg" width="1280" height="720" decoding="async" fetchpriority="high" alt="Jade Maa, fondatrice de La Bonne Méthode">
+      </div>
     </div>
   </div>
 </section>
@@ -255,8 +263,33 @@
   </div>
 </section>
 
+<!-- POP-UP ANNONCE COHORTE -->
+<div class="pop" id="lbmPop" hidden>
+  <div class="pop__ov" data-close></div>
+  <div class="pop__card" role="dialog" aria-modal="true" aria-labelledby="lbmPopTitle">
+    <span class="pop__tag"><span class="dot"></span>Annonce</span>
+    <button class="pop__x" data-close aria-label="Fermer">&times;</button>
+    <span class="pop__eb">La Bonne Méthode</span>
+    <h3 id="lbmPopTitle">Prochaine cohorte<br>le <em>14 septembre</em>.</h3>
+    <p>Les places sont limitées et les inscriptions ouvrent bientôt. Rejoignez la liste d'attente pour être prévenu(e) en priorité, avant tout le monde.</p>
+    <a href="https://go.jade-maa.com/optin" target="_blank" rel="noopener" class="btn btn-dark">Rejoindre la liste d'attente</a>
+  </div>
+</div>
+
 <div id="footer-mount"></div>
 <script src="assets/partials.js"></script>
 <script src="assets/app.js"></script>
+<script>
+(function(){
+  var pop=document.getElementById('lbmPop'); if(!pop) return;
+  var KEY='lbm-pop-cohorte-14sept';
+  var seen=null; try{seen=sessionStorage.getItem(KEY);}catch(e){}
+  function open(){ pop.hidden=false; document.body.style.overflow='hidden'; }
+  function close(){ pop.hidden=true; document.body.style.overflow=''; try{sessionStorage.setItem(KEY,'1');}catch(e){} }
+  if(!seen){ setTimeout(open, 700); }
+  pop.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !pop.hidden) close(); });
+})();
+</script>
 </body>
 </html>
