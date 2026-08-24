@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réserver · Conférence « Dans ma valise, il y a… » · Lyon · Jade Maa</title>
+<meta name="description" content="Réservez votre place pour la conférence « Dans ma valise, il y a… » de Jade Maa, le samedi 7 novembre 2026 à Lyon. Paiement sécurisé.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css?v=45">
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<!-- EN-TÊTE PRODUIT -->
+<section class="page-hero" style="padding-bottom:34px">
+  <div class="wrap">
+    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> › <a href="evenements.html">Les événements</a> › <a href="conference-dans-ma-valise.html">La conférence</a> › Réserver · Lyon</div>
+    <span class="eyebrow reveal" data-d="1" style="display:block;margin-top:14px">Réserver · Lyon</span>
+    <h1 class="reveal" data-d="1">Réservez <em>votre place</em>.</h1>
+    <div class="hero-text">
+      <p class="lead reveal" data-d="2">Conférence «&nbsp;Dans ma valise, il y a…&nbsp;» avec Jade Maa. Samedi 7 novembre, de 13h à 17h, à l'Hôtel &amp; Spa de Chassieu (Lyon Est). Les places sont limitées.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAIEMENT -->
+<section class="section" id="paiement" style="padding-top:6px">
+  <div class="wrap">
+    <div class="pay-wrap reveal">
+      <aside class="pay-summary">
+        <div class="pay-price">69&nbsp;€ <small>/ personne</small></div>
+        <ul>
+          <li>Conférence «&nbsp;Dans ma valise, il y a…&nbsp;»</li>
+          <li>Samedi 7 novembre · 13h – 17h</li>
+          <li>Hôtel &amp; Spa de Chassieu · Lyon Est</li>
+          <li>Confirmation et informations envoyées par email</li>
+        </ul>
+        <p class="fineprint">Paiement sécurisé par Stripe. Une question&nbsp;? <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>.</p>
+      </aside>
+      <div class="pay-checkout">
+        <div id="checkout"><div class="pay-loading">Chargement du paiement sécurisé…</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/partials.js"></script>
+<script src="assets/app.js"></script>
+
+<!-- PAIEMENT INTÉGRÉ — Stripe Embedded Checkout -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function(){
+  var STRIPE_PK = 'pk_live_51SoctOBzUtKi0psW6oexrpuq4Qbl0TQm8lEVIHCfN0S4GnE41o50czfPTKfFFHepKuQL4FtBG9K4S8o19P46VHHR00itLmrTVg';
+  var mountEl = document.getElementById('checkout');
+  if(!mountEl || typeof Stripe === 'undefined'){ if(mountEl) mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> pour réserver.</p>'; return; }
+  function fail(){ mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> pour réserver.</p>'; }
+  (async function(){
+    if(!STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ fail(); return; }
+    try{
+      var stripe = Stripe(STRIPE_PK);
+      var checkout = await stripe.initEmbeddedCheckout({
+        fetchClientSecret: async function(){
+          var r = await fetch('/api/create-checkout-session', { method:'POST' });
+          var d = await r.json();
+          if(!r.ok || !d.clientSecret) throw new Error('no secret');
+          return d.clientSecret;
+        }
+      });
+      mountEl.innerHTML = '';
+      checkout.mount('#checkout');
+    }catch(e){ fail(); }
+  })();
+})();
+</script>
+</body>
+</html>

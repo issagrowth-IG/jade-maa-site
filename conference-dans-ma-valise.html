@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=44">
+<link rel="stylesheet" href="assets/app.css?v=45">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Event","name":"Dans ma valise, il y a… · Lyon","description":"Une initiation pour mieux se comprendre, mieux communiquer et avancer avec soi. Conférence de Jade Maa.","startDate":"2026-11-07T13:00:00+01:00","endDate":"2026-11-07T17:00:00+01:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"Best Western Plus Hôtel & Spa de Chassieu","address":{"@type":"PostalAddress","streetAddress":"6 avenue du Progrès","postalCode":"69680","addressLocality":"Chassieu","addressCountry":"FR"}},"performer":{"@type":"Person","name":"Jade Maa"},"organizer":{"@type":"Person","name":"Jade Maa","url":"https://jade-maa.com"}},
@@ -34,7 +34,7 @@
       <p class="reveal" data-d="3">Mais que contient vraiment notre valise&nbsp;? Et surtout&nbsp;: <em>comment apprendre à mieux vivre avec tout ce qu'elle contient&nbsp;?</em></p>
     </div>
     <div class="actions reveal" data-d="3" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:38px">
-      <a href="#paiement" class="btn btn-dark">Je réserve ma place · Lyon</a>
+      <a href="conference-lyon.html" class="btn btn-dark">Je réserve ma place · Lyon</a>
       <a href="#dates" class="btn btn-ghost">Voir les prochaines dates</a>
     </div>
   </div>
@@ -140,7 +140,7 @@
           <li>De 13h à 17h</li>
           <li>Places limitées</li>
         </ul>
-        <p class="reveal" data-d="3" style="margin-top:30px"><a href="#paiement" class="btn btn-dark">Je réserve ma place · 69 €</a></p>
+        <p class="reveal" data-d="3" style="margin-top:30px"><a href="conference-lyon.html" class="btn btn-dark">Je réserve ma place · 69 €</a></p>
       </div>
     </div>
 
@@ -169,32 +169,6 @@
           <div class="tags"><span class="tag">Les inscriptions ouvriront prochainement</span></div>
         </div>
         <div class="actions"><a href="#inscription" class="btn btn-ghost" data-ville="lille-30-jan">Être prévenu(e)</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAIEMENT / RÉSERVATION LYON (checkout intégré, le client reste sur le site) -->
-<section class="section" id="paiement" style="padding-top:110px">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow reveal">Réserver · Lyon</span>
-      <h2 class="reveal" data-d="1">Réservez <br>votre <em>place</em>.</h2>
-      <p class="reveal" data-d="2">Samedi 7 novembre, de 13h à 17h, à l'Hôtel &amp; Spa de Chassieu (Lyon Est). Les places sont limitées. Le paiement se fait directement ci-dessous, en toute sécurité.</p>
-    </div>
-    <div class="pay-wrap reveal" data-d="2">
-      <aside class="pay-summary">
-        <div class="pay-price">69&nbsp;€ <small>/ personne</small></div>
-        <ul>
-          <li>Conférence «&nbsp;Dans ma valise, il y a…&nbsp;»</li>
-          <li>Samedi 7 novembre · 13h – 17h</li>
-          <li>Hôtel &amp; Spa de Chassieu · Lyon Est</li>
-          <li>Confirmation et informations envoyées par email</li>
-        </ul>
-        <p class="fineprint">Paiement sécurisé par Stripe. Une question&nbsp;? <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>.</p>
-      </aside>
-      <div class="pay-checkout">
-        <div id="checkout"><div class="pay-loading">Chargement du paiement sécurisé…</div></div>
       </div>
     </div>
   </div>
@@ -329,42 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-</script>
-
-<!-- PAIEMENT INTÉGRÉ — Stripe Embedded Checkout -->
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-(function(){
-  var STRIPE_PK = 'pk_live_51SoctOBzUtKi0psW6oexrpuq4Qbl0TQm8lEVIHCfN0S4GnE41o50czfPTKfFFHepKuQL4FtBG9K4S8o19P46VHHR00itLmrTVg'; // clé publique Stripe (non secrète)
-  var mountEl = document.getElementById('checkout');
-  var section = document.getElementById('paiement');
-  if(!mountEl || !section || typeof Stripe === 'undefined') return;
-  var started = false;
-  function fail(){ mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> pour réserver.</p>'; }
-  async function start(){
-    if(started) return; started = true;
-    if(!STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ fail(); return; }
-    try{
-      var stripe = Stripe(STRIPE_PK);
-      var checkout = await stripe.initEmbeddedCheckout({
-        fetchClientSecret: async function(){
-          var r = await fetch('/api/create-checkout-session', { method:'POST' });
-          var d = await r.json();
-          if(!r.ok || !d.clientSecret) throw new Error('no secret');
-          return d.clientSecret;
-        }
-      });
-      mountEl.innerHTML = '';
-      checkout.mount('#checkout');
-    }catch(e){ started = false; fail(); }
-  }
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){ if(en.isIntersecting){ start(); io.disconnect(); } });
-    }, { rootMargin: '400px' });
-    io.observe(section);
-  } else { start(); }
-})();
 </script>
 </body>
 </html>
