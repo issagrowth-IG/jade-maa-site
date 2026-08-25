@@ -1168,3 +1168,14 @@ a.event:hover .go{gap:14px}
   .r-sticky-bar .btn{padding:12px 14px;letter-spacing:.1em;white-space:nowrap}
   .r-sticky-bar .px{font-size:.95rem}
 }
+
+/* --- Conférence complète (jauge des 95 places atteinte) ---------------
+   #checkout porte le cadre blanc et l'ombre du module Stripe : quand le
+   bloc « Complet » prend sa place, on rend le conteneur neutre, la DA
+   n'ayant pas d'ombres.                                                 */
+.btn.is-complet{background:var(--bg-2);color:var(--brun);border-color:var(--line);cursor:default;pointer-events:none}
+.pay-checkout #checkout.is-complet{background:transparent;box-shadow:none;border-radius:0;overflow:visible}
+.pay-complet{border:1px solid var(--line);border-radius:12px;background:var(--bg-2);padding:56px 34px;text-align:center}
+.pay-complet p{color:var(--ink);font-size:.95rem;margin:0 auto;max-width:40ch}
+.pay-complet p.pay-complet__t{font-family:var(--serif);font-weight:500;font-size:2rem;line-height:1.15;color:var(--titre);margin:16px auto 14px;max-width:none}
+.pay-complet a{text-decoration:underline}

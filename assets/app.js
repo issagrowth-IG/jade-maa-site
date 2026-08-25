@@ -78,3 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
   dupliquer();
   mq.addEventListener('change', dupliquer);
 });
+
+/* --- Conférence de Lyon : bascule « Complet » ---------------------------
+   Quand les 95 places sont vendues, les boutons qui pointent vers la
+   billetterie deviennent une mention « Complet ». C'est de l'affichage :
+   le verrou réel est côté serveur, dans create-checkout-session.
+   Si l'API ne répond pas, on ne touche à rien — un bouton qui mène à une
+   page complète est moins grave qu'un « Complet » affiché à tort.        */
+document.addEventListener('DOMContentLoaded', () => {
+  const ctas = document.querySelectorAll('[data-conf-cta]');
+  if (!ctas.length) return;
+
+  fetch('/api/conference-places')
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => {
+      if (!d || !d.soldOut) return;
+      ctas.forEach(a => {
+        const mention = document.createElement('span');
+        mention.className = a.className + ' is-complet';
+        mention.setAttribute('aria-disabled', 'true');
+        mention.textContent = 'Complet';
+        a.replaceWith(mention);
+      });
+      document.querySelectorAll('[data-conf-statut]').forEach(el => { el.textContent = 'Complet'; });
+    })
+    .catch(() => {});
+});

@@ -6,6 +6,7 @@
    Env : STRIPE_WEBHOOK_SECRET (whsec_…), GHL_PIT, GHL_LOCATION_ID. */
 
 import { SUBJECT, HTML } from './_conf-email.js';
+import { CAP_LYON, EVENT_LYON, comptePlacesVendues } from './_places.js';
 
 const GHL = 'https://services.leadconnectorhq.com';
 
@@ -104,6 +105,24 @@ export async function onRequestPost({ request, env }) {
   if (!tr || !tr.ok) {
     console.error('stripe-webhook: tag non posé', tr && tr.status);
     return json({ error: 'tag' }, 502); // pas encore de mail envoyé → Stripe peut réessayer sans doublon
+  }
+
+  // Filet de sécurité de la jauge. Le verrou est posé avant paiement, mais deux
+  // achats simultanés sur la dernière place passeraient tous les deux : on tague
+  // le contact en trop pour qu'il soit traité à la main (jamais de remboursement
+  // automatique). Best-effort, un échec ici ne bloque pas la confirmation.
+  if (env.STRIPE_KEY && tag === 'conf-lyon-07-nov-paye') {
+    try {
+      const vendues = await comptePlacesVendues(env.STRIPE_KEY);
+      if (vendues > CAP_LYON) {
+        console.error(`stripe-webhook: SURBOOKING ${EVENT_LYON} — ${vendues}/${CAP_LYON} places`);
+        await fetch(`${GHL}/contacts/${id}/tags`, {
+          method: 'POST', headers, body: JSON.stringify({ tags: ['conf-lyon-07-nov-surbooking'] }),
+        }).catch(() => null);
+      }
+    } catch (e) {
+      console.error('stripe-webhook: verification de la jauge impossible', e && e.message);
+    }
   }
 
   // Mail de confirmation envoyé par GHL. Best-effort : un échec ne fait pas réessayer

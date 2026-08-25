@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=45">
+<link rel="stylesheet" href="assets/app.css?v=47">
 </head>
 <body>
 <div id="nav-mount"></div>
@@ -51,29 +51,49 @@
 <script src="assets/partials.js"></script>
 <script src="assets/app.js"></script>
 
-<!-- PAIEMENT INTÉGRÉ — Stripe Embedded Checkout -->
+<!-- PAIEMENT INTÉGRÉ — Stripe Embedded Checkout, avec jauge des 95 places -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
 (function(){
   var STRIPE_PK = 'pk_live_51SoctOBzUtKi0psW6oexrpuq4Qbl0TQm8lEVIHCfN0S4GnE41o50czfPTKfFFHepKuQL4FtBG9K4S8o19P46VHHR00itLmrTVg';
   var mountEl = document.getElementById('checkout');
-  if(!mountEl || typeof Stripe === 'undefined'){ if(mountEl) mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> pour réserver.</p>'; return; }
-  function fail(){ mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a> pour réserver.</p>'; }
+  var WA = '<a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>';
+  if(!mountEl) return;
+
+  function panne(){ mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur ' + WA + ' pour réserver.</p>'; }
+  function complet(){
+    mountEl.innerHTML = '<div class="pay-complet">'
+      + '<span class="eyebrow">Complet</span>'
+      + '<p class="pay-complet__t">Les 95 places sont réservées.</p>'
+      + '<p>La conférence du 7 novembre à Lyon affiche complet. Les autres dates sont sur la page <a href="evenements.html">Les événements</a>, et vous pouvez nous écrire sur ' + WA + '.</p>'
+      + '</div>';
+    mountEl.classList.add('is-complet');
+    var prix = document.querySelector('.pay-price');
+    if(prix) prix.textContent = 'Complet';
+    var fine = document.querySelector('.pay-summary .fineprint');
+    if(fine) fine.innerHTML = 'Les inscriptions sont closes pour cette date. Une question&nbsp;? ' + WA + '.';
+  }
+
+  if(typeof Stripe === 'undefined'){ panne(); return; }
+
   (async function(){
-    if(!STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ fail(); return; }
+    if(!STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ panne(); return; }
+    var r, d;
+    // La session est demandée d'abord : c'est elle qui porte le verrou des 95 places.
+    try{
+      r = await fetch('/api/create-checkout-session', { method:'POST' });
+      d = await r.json();
+    }catch(e){ panne(); return; }
+    if(r.status === 409 || (d && d.soldOut)){ complet(); return; }
+    if(!r.ok || !d || !d.clientSecret){ panne(); return; }
     try{
       var stripe = Stripe(STRIPE_PK);
       var checkout = await stripe.initEmbeddedCheckout({
-        fetchClientSecret: async function(){
-          var r = await fetch('/api/create-checkout-session', { method:'POST' });
-          var d = await r.json();
-          if(!r.ok || !d.clientSecret) throw new Error('no secret');
-          return d.clientSecret;
-        }
+        fetchClientSecret: function(){ return Promise.resolve(d.clientSecret); }
       });
       mountEl.innerHTML = '';
       checkout.mount('#checkout');
-    }catch(e){ fail(); }
+    }catch(e){ panne(); }
   })();
 })();
 </script>
