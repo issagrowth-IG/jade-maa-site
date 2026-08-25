@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
         a.replaceWith(mention);
       });
       document.querySelectorAll('[data-conf-statut]').forEach(el => { el.textContent = 'Complet'; });
+      // Phrases qui annoncent des inscriptions ouvertes : chacune porte sa version « complet ».
+      document.querySelectorAll('[data-conf-texte-complet]').forEach(el => { el.textContent = el.getAttribute('data-conf-texte-complet'); });
     })
     .catch(() => {});
 });
