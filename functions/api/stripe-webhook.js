@@ -11,7 +11,8 @@ const GHL = 'https://services.leadconnectorhq.com';
 
 // Clé (payment_link OU metadata.event du checkout intégré) → tag GHL. Une ligne par événement payant.
 const EVENT_TAGS = {
-  'plink_1U80kwBzUtKi0psW96QQPCyB': 'conf-lyon-07-nov-paye', // Payment Link (fallback)
+  'plink_1U8QhlBzUtKi0psWF9H9CMzd': 'conf-lyon-07-nov-paye', // Payment Link 79 € (fallback)
+  'plink_1U80kwBzUtKi0psW96QQPCyB': 'conf-lyon-07-nov-paye', // Payment Link 69 € (désactivé le 25/08)
   'conf-lyon-07-nov': 'conf-lyon-07-nov-paye',               // checkout intégré (metadata.event)
 };
 

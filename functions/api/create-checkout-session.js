@@ -3,7 +3,7 @@
    que Stripe.js monte dans la page (le client ne quitte pas jade-maa.com).
    Env : STRIPE_KEY (clé restreinte rk_live, droits Checkout write). */
 
-const PRICE_LYON = 'price_1U80kwBzUtKi0psWrK7qkj21'; // 69 € · conf « Dans ma valise » Lyon 07/11
+const PRICE_LYON = 'price_1U8QgtBzUtKi0psWNM9Z4Ko8'; // 79 € · conf « Dans ma valise » Lyon 07/11
 const RETURN_URL = 'https://jade-maa.com/conference-merci?session_id={CHECKOUT_SESSION_ID}';
 
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { 'Content-Type': 'application/json' } });
