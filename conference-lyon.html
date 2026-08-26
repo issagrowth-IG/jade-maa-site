@@ -26,6 +26,18 @@
   </div>
 </section>
 
+<style>
+/* Filet de securite du paiement : quand le checkout integre ne peut pas
+   s'afficher (navigateur integre restrictif, bloqueur de contenu, reseau),
+   on ne laisse jamais un cul-de-sac : on propose la page de paiement Stripe. */
+.pay-secours{border:1px solid var(--line);border-radius:12px;background:#FFFEFC;padding:44px 26px;text-align:center}
+.pay-secours__t{color:var(--ink);font-size:.98rem;line-height:1.7;margin:0 auto 22px;max-width:36ch}
+.pay-secours__f{font-size:.78rem;color:var(--brun-2);margin:20px auto 0;max-width:40ch}
+.pay-secours__f a{text-decoration:underline}
+.pay-alt{text-align:center;font-size:.8rem;color:var(--brun-2);margin:16px 0 0}
+.pay-alt a{text-decoration:underline}
+</style>
+
 <!-- PAIEMENT -->
 <section class="section" id="paiement" style="padding-top:6px">
   <div class="wrap">
@@ -42,6 +54,7 @@
       </aside>
       <div class="pay-checkout">
         <div id="checkout"><div class="pay-loading">Chargement du paiement sécurisé…</div></div>
+        <p class="pay-alt" id="pay-alt" hidden>Le paiement ne s'affiche pas&nbsp;? <a href="https://buy.stripe.com/fZuaEWctr88c9Mzcqu0oM0h" target="_blank" rel="noopener">Ouvrir la page de paiement sécurisée</a>.</p>
       </div>
     </div>
   </div>
@@ -58,9 +71,23 @@
   var STRIPE_PK = 'pk_live_51SoctOBzUtKi0psW6oexrpuq4Qbl0TQm8lEVIHCfN0S4GnE41o50czfPTKfFFHepKuQL4FtBG9K4S8o19P46VHHR00itLmrTVg';
   var mountEl = document.getElementById('checkout');
   var WA = '<a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>';
+  // Page de paiement Stripe hebergee : meme billet, meme prix, meme jauge
+  // (metadata event = conf-lyon-07-nov), donc meme tag et meme mail de confirmation.
+  var LIEN_DIRECT = 'https://buy.stripe.com/fZuaEWctr88c9Mzcqu0oM0h';
   if(!mountEl) return;
 
-  function panne(){ mountEl.innerHTML = '<p class="pay-loading">Le paiement en ligne est momentanément indisponible. Écrivez-nous sur ' + WA + ' pour réserver.</p>'; }
+  // Le paiement integre peut ne pas s'afficher (navigateur integre d'Instagram,
+  // bloqueur de contenu, js.stripe.com injoignable). Dans ce cas on bascule sur
+  // la page de paiement Stripe plutot que de renvoyer la personne sur WhatsApp.
+  function panne(){
+    mountEl.innerHTML = '<div class="pay-secours">'
+      + '<p class="pay-secours__t">Le paiement ne s\'affiche pas dans votre navigateur. Vous pouvez réserver votre place ici&nbsp;:</p>'
+      + '<p><a href="' + LIEN_DIRECT + '" target="_blank" rel="noopener" class="btn btn-dark">Réserver ma place · 79&nbsp;€</a></p>'
+      + '<p class="pay-secours__f">Page de paiement sécurisée Stripe. Une question&nbsp;? ' + WA + '.</p>'
+      + '</div>';
+    var alt = document.getElementById('pay-alt');
+    if(alt) alt.hidden = true;
+  }
   function complet(){
     mountEl.innerHTML = '<div class="pay-complet">'
       + '<span class="eyebrow">Complet</span>'
@@ -93,6 +120,11 @@
       });
       mountEl.innerHTML = '';
       checkout.mount('#checkout');
+      // Le mount peut ne rien lever et pourtant ne rien afficher (webview verrouillee).
+      // Si aucune iframe Stripe au bout de 9 s, on bascule sur la page hebergee.
+      setTimeout(function(){ if(!mountEl.querySelector('iframe')) panne(); }, 9000);
+      var alt = document.getElementById('pay-alt');
+      if(alt) alt.hidden = false;
     }catch(e){ panne(); }
   })();
 })();
