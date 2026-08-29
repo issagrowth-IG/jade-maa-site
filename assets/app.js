@@ -166,7 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Disponibilités réelles. Silencieux en cas d'échec, volontairement.
   fetch(`/api/sejour-places?sejour=${encodeURIComponent(sejour)}`, { cache: 'no-store' })
-    .then(r => (r.ok ? r.json() : null))
+    // Une API absente est servie par Cloudflare comme la page d'accueil, en HTML
+    // et en 200 : sans ce controle du type, on parse du HTML et l'echec passe
+    // pour une reponse vide au lieu d'une panne.
+    .then(r => (r.ok && (r.headers.get('content-type') || '').includes('json') ? r.json() : null))
     .then(d => {
       if (!d || !Array.isArray(d.chambres)) return;
       const par = Object.fromEntries(d.chambres.map(c => [c.id, c]));

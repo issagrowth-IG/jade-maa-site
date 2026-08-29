@@ -148,6 +148,8 @@
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ sejour:idSejour, chambre:idChambre })
       });
+      // Meme piege qu'ailleurs : une API absente revient en HTML avec un 200.
+      if(!(r.headers.get('content-type')||'').includes('json')){ panne(); return; }
       d = await r.json();
     }catch(e){ panne(); return; }
     if(r.status === 409 || (d && d.soldOut)){ complet(); return; }
