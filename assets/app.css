@@ -370,7 +370,9 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .r-aside .price{font-family:var(--sans);font-weight:300;font-size:2rem;letter-spacing:.01em;color:var(--titre)}
 .r-aside .price small{font-size:.9rem;color:var(--brun-2)}
 .r-aside .rooms{margin:18px 0;border-top:1px solid var(--line)}
-.r-aside .rooms div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.r-aside .rooms div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.r-aside .rooms strong{white-space:nowrap}
+.r-aside .rooms em{display:block;font-style:normal;font-size:.78rem;color:var(--brun-2);margin-top:3px;line-height:1.5}
 .r-aside .rooms span{color:var(--ink)}
 /* text-align en plus de justify-content : le second centre la boite flex,
    pas les lignes du libelle quand il passe sur deux lignes. */
