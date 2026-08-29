@@ -106,3 +106,90 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(() => {});
 });
+
+/* --- Séjours : choix de la chambre, conditions de vente, disponibilités ---
+   Le bouton d'inscription reste inerte tant qu'une chambre n'est pas choisie
+   ET que les conditions ne sont pas acceptées : au clic il dit ce qui manque
+   plutot que de ne rien faire. Les disponibilites viennent de l'API des places ;
+   si elle ne repond pas on ne touche a rien (un bouton vers une page qui refusera
+   vaut mieux qu'un « complet » affiche a tort). */
+document.addEventListener('DOMContentLoaded', () => {
+  const bloc = document.querySelector('.rooms[data-sejour]');
+  if (!bloc) return;
+
+  const sejour   = bloc.dataset.sejour;
+  const cases    = [...bloc.querySelectorAll('.room')];
+  const tete     = document.querySelector('[data-prix-tete]');
+  const sticky   = document.querySelector('[data-prix-sticky]');
+  const cgv      = document.querySelector('[data-cgv]');
+  const rappel   = document.querySelector('[data-cgv-rappel]');
+  const cta      = document.querySelector('[data-reserver]');
+  const baseHref = cta ? cta.getAttribute('href') : '';
+
+  const choisie = () => cases.find(l => l.querySelector('input').checked && !l.classList.contains('is-complet'));
+
+  function maj() {
+    const l = choisie();
+    cases.forEach(c => c.classList.toggle('is-choisie', c === l));
+    if (l) {
+      const p = l.querySelector('input').dataset.prix;
+      if (tete)   tete.textContent = p;
+      if (sticky) sticky.textContent = p;
+    }
+    const pret = !!l && cgv && cgv.checked;
+    if (cta) {
+      cta.classList.toggle('is-bloque', !pret);
+      cta.setAttribute('aria-disabled', pret ? 'false' : 'true');
+      cta.setAttribute('href', pret ? `${baseHref}&chambre=${encodeURIComponent(l.querySelector('input').value)}` : baseHref);
+    }
+    if (pret && rappel) rappel.hidden = true;
+  }
+
+  bloc.addEventListener('change', maj);
+  bloc.addEventListener('click', e => {
+    const l = e.target.closest('.room');
+    if (l && l.classList.contains('is-complet')) e.preventDefault();
+  });
+  if (cgv) cgv.addEventListener('change', maj);
+
+  if (cta) cta.addEventListener('click', e => {
+    if (cta.getAttribute('aria-disabled') !== 'true') return;
+    e.preventDefault();
+    if (rappel) {
+      rappel.hidden = false;
+      rappel.textContent = !choisie()
+        ? "Choisis d'abord ta chambre ci-dessus."
+        : "Merci d'accepter les conditions générales de vente pour continuer.";
+      rappel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  // Disponibilités réelles. Silencieux en cas d'échec, volontairement.
+  fetch(`/api/sejour-places?sejour=${encodeURIComponent(sejour)}`, { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(d => {
+      if (!d || !Array.isArray(d.chambres)) return;
+      const par = Object.fromEntries(d.chambres.map(c => [c.id, c]));
+      cases.forEach(l => {
+        const input = l.querySelector('input');
+        const c = par[input.value];
+        const etat = l.querySelector('.room__s');
+        if (!c) return;
+        const restantes = d.complet ? 0 : Math.min(c.restantes, d.restantesGlobal);
+        if (restantes <= 0) {
+          l.classList.add('is-complet');
+          input.checked = false;
+          input.disabled = true;
+          etat.textContent = 'Complet';
+        } else if (restantes === 1) {
+          etat.textContent = 'Dernière place';
+        } else if (restantes <= 3) {
+          etat.textContent = `Plus que ${restantes} places`;
+        }
+      });
+      maj();
+    })
+    .catch(() => {});
+
+  maj();
+});

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'">
+<title>Places des séjours · Jade Maa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css?v=1">
+</head>
+<body>
+
+<!-- Écran d'attente, le temps de savoir si la session est ouverte -->
+<div id="ecran-attente" class="ecran-centre">
+  <p class="attente-txt">Chargement</p>
+</div>
+
+<!-- ÉCRAN 1 : mot de passe -->
+<main id="ecran-login" class="ecran-centre" hidden>
+  <div class="carte-login">
+    <p class="eyebrow">Jade Maa</p>
+    <h1 class="titre-login">Les places des séjours</h1>
+    <p class="login-txt">Cette page affiche les coordonnées des inscrites. Elle demande le mot de passe partagé.</p>
+    <form id="form-login" method="post" action="/api/admin-login" autocomplete="on">
+      <label class="etiquette" for="motDePasse">Mot de passe</label>
+      <input class="champ" id="motDePasse" name="motDePasse" type="password" autocomplete="current-password" required>
+      <button class="btn btn-plein btn-large" type="submit" id="btn-login">Entrer</button>
+    </form>
+    <p class="msg msg-erreur" id="login-erreur" role="alert" hidden></p>
+  </div>
+</main>
+
+<!-- ÉCRAN 2 : le back-office -->
+<div id="ecran-admin" hidden>
+
+  <header class="tete">
+    <div class="tete-in">
+      <div class="tete-g">
+        <p class="eyebrow">Jade Maa · back-office</p>
+        <h1 class="tete-titre">Les places des séjours</h1>
+      </div>
+      <div class="tete-d">
+        <p class="maj" id="maj" aria-live="polite">Jamais mis à jour</p>
+        <div class="tete-btns">
+          <button class="btn btn-ligne" type="button" id="btn-refresh">Rafraîchir</button>
+          <button class="btn btn-nu" type="button" id="btn-logout">Fermer la session</button>
+        </div>
+      </div>
+    </div>
+    <nav class="onglets" id="onglets" aria-label="Choisir un séjour">
+      <button class="onglet" type="button" data-sejour="manoir" aria-current="true">
+        <span class="onglet-t">Le Manoir Ducey</span>
+        <span class="onglet-s">21 au 25 octobre 2026</span>
+      </button>
+      <button class="onglet" type="button" data-sejour="plessis">
+        <span class="onglet-t">Le Plessis-Placy</span>
+        <span class="onglet-s">18 au 22 novembre 2026</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="corps" id="corps">
+    <p class="msg msg-erreur" id="erreur-globale" role="alert" hidden></p>
+    <div id="panneau"></div>
+  </main>
+
+  <footer class="pied">
+    <p>Écran interne. Ne pas transmettre ce lien ni le mot de passe en dehors de Sharon et Jade.</p>
+  </footer>
+</div>
+
+<!-- Fenêtre de confirmation, commune à toutes les actions -->
+<div class="modale" id="modale" hidden>
+  <div class="modale-fond" id="modale-fond"></div>
+  <div class="modale-carte" role="dialog" aria-modal="true" aria-labelledby="modale-titre">
+    <h2 class="modale-titre" id="modale-titre"></h2>
+    <p class="modale-txt" id="modale-txt"></p>
+    <div class="modale-champ" id="modale-champ" hidden>
+      <label class="etiquette" for="modale-note">Note</label>
+      <textarea class="champ" id="modale-note" rows="4" maxlength="600"></textarea>
+    </div>
+    <p class="msg msg-erreur" id="modale-erreur" role="alert" hidden></p>
+    <div class="modale-btns">
+      <button class="btn btn-nu" type="button" id="modale-annuler">Annuler</button>
+      <button class="btn btn-plein" type="button" id="modale-ok">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<div class="notif" id="notif" role="status" hidden></div>
+
+<script src="assets/admin.js?v=1" defer></script>
+</body>
+</html>

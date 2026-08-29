@@ -1,0 +1,250 @@
+/* ============================================================
+   JADE MAA · back-office des places (admin.html)
+   Outil interne : lisible d'abord, mais dans l'univers du site.
+   Jetons repris tels quels de assets/app.css (jamais modifié).
+   Pas d'ombre, filets 1px, radius 3px, aucun jaune.
+   ============================================================ */
+:root{
+  --bg:#FAF7F4;
+  --bg-2:#F5F1ED;
+  --papier:#FFFEFC;
+  --titre:#2E2A29;
+  --fonce:#3D3532;
+  --brun:#5B4137;
+  --brun-2:#8A6553;
+  --terra:#B97E63;
+  --rose:#DEC4B2;
+  --line:#E7DDD6;
+  --ink:#575757;
+  --btn:#8A5A44;
+  --btn-h:#6D4735;
+  --gris:#7A6A63;      /* place bloquée */
+  --gris-2:#A79B93;    /* ligne sans effet sur les places */
+  --alerte:#A23B2E;    /* complet, refus. Jamais de jaune. */
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Lato',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+[hidden]{display:none!important}
+
+.eyebrow{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra)}
+.etiquette{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brun-2);margin-bottom:7px}
+
+/* ---- Boutons ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:11px 18px;border-radius:3px;border:1px solid transparent;
+  background:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s;
+  white-space:nowrap;
+}
+.btn-plein{background:var(--btn);color:#fff}
+.btn-plein:hover{background:var(--btn-h)}
+.btn-ligne{border-color:var(--line);color:var(--brun);background:var(--papier)}
+.btn-ligne:hover{border-color:var(--brun-2);color:var(--brun)}
+.btn-nu{color:var(--brun-2);padding-left:8px;padding-right:8px}
+.btn-nu:hover{color:var(--terra)}
+.btn-large{width:100%;padding:14px 18px}
+.btn-mini{font-size:.62rem;letter-spacing:.14em;padding:7px 11px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn-danger{border-color:rgba(162,59,46,.4);color:var(--alerte);background:var(--papier)}
+.btn-danger:hover{background:rgba(162,59,46,.06);border-color:var(--alerte)}
+
+/* ---- Champs ---- */
+.champ{
+  width:100%;background:var(--bg);border:1px solid var(--line);border-radius:3px;
+  padding:11px 13px;color:var(--fonce);outline:none;transition:border-color .2s;
+}
+.champ:focus{border-color:var(--terra)}
+textarea.champ{resize:vertical;line-height:1.6}
+
+/* ---- Messages ---- */
+.msg{font-size:.86rem;padding:11px 14px;border-radius:3px;border:1px solid var(--line);margin-bottom:18px}
+.msg-erreur{color:var(--alerte);border-color:rgba(162,59,46,.35);background:rgba(162,59,46,.05)}
+
+/* ============================================================
+   ÉCRAN CENTRÉ (attente + mot de passe)
+   ============================================================ */
+.ecran-centre{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 20px}
+.attente-txt{font-family:var(--serif);font-size:1.4rem;color:var(--brun-2)}
+.carte-login{
+  width:100%;max-width:420px;background:var(--papier);
+  border:1px solid var(--line);border-radius:3px;padding:38px 30px;
+}
+.titre-login{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.15;color:var(--titre);margin:14px 0 0}
+.login-txt{font-size:.9rem;margin:16px 0 26px;color:var(--ink)}
+.carte-login .champ{margin-bottom:18px}
+
+/* ============================================================
+   EN-TÊTE
+   ============================================================ */
+.tete{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.tete-in{
+  max-width:1180px;margin:0 auto;padding:20px;
+  display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;justify-content:space-between;
+}
+.tete-titre{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.15;color:var(--titre);margin-top:6px}
+.tete-d{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.tete-btns{display:flex;gap:8px;flex-wrap:wrap}
+.maj{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brun-2)}
+.maj.vieux{color:var(--alerte)}
+
+.onglets{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:6px}
+.onglet{
+  background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;
+  padding:10px 2px 12px;margin-right:24px;text-align:left;transition:border-color .25s;
+}
+.onglet-t{display:block;font-family:var(--serif);font-size:1.15rem;color:var(--brun-2);transition:color .25s}
+.onglet-s{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-2);margin-top:2px}
+.onglet[aria-current="true"]{border-bottom-color:var(--terra)}
+.onglet[aria-current="true"] .onglet-t{color:var(--titre)}
+.onglet:hover .onglet-t{color:var(--titre)}
+
+/* ============================================================
+   CORPS
+   ============================================================ */
+.corps{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+.bloc{margin-bottom:44px}
+.bloc-titre{
+  font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--terra);
+  padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:20px;
+}
+.chargement{color:var(--brun-2);font-style:italic;padding:30px 0}
+
+/* ---- Bandeau du séjour ---- */
+.bandeau-t{font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.15;color:var(--titre)}
+.bandeau-s{font-size:.78rem;letter-spacing:.06em;color:var(--brun-2);margin-top:6px}
+
+/* ---- Tuiles de chiffres ---- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;margin-top:22px;overflow:hidden}
+.tuile{background:var(--papier);padding:18px 16px}
+.tuile-k{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brun-2)}
+.tuile-v{font-family:var(--serif);font-size:2.2rem;line-height:1.1;color:var(--titre);margin-top:6px}
+.tuile-n{font-size:.72rem;color:var(--gris-2);margin-top:2px}
+.tuile-alerte .tuile-v{color:var(--alerte)}
+
+/* ---- Encadrés d'explication ---- */
+.encadre{border:1px solid var(--line);border-left:2px solid var(--terra);border-radius:3px;background:var(--papier);padding:16px 18px;margin-top:18px}
+.encadre-alerte{border-left-color:var(--alerte)}
+.encadre-t{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brun-2);margin-bottom:6px}
+.encadre-alerte .encadre-t{color:var(--alerte)}
+.encadre p{font-size:.88rem;color:var(--ink)}
+
+/* ---- Chambres ---- */
+.chambre{border:1px solid var(--line);border-radius:3px;background:var(--papier);padding:18px;margin-bottom:12px}
+.chambre-tete{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.chambre-nom{font-family:var(--serif);font-size:1.25rem;color:var(--titre)}
+.chambre-det{font-size:.78rem;color:var(--gris-2)}
+.chambre-prix{font-size:.84rem;color:var(--brun-2);white-space:nowrap}
+.jauge{display:flex;height:4px;background:#EFE7E1;border-radius:2px;overflow:hidden;margin:14px 0 12px}
+.j-v{width:var(--v,0%);background:var(--brun)}
+.j-t{width:var(--t,0%);background:var(--terra)}
+.chiffres{display:flex;flex-wrap:wrap;gap:6px 22px}
+.chiffre{font-size:.8rem;color:var(--ink)}
+.chiffre b{font-weight:700;color:var(--titre)}
+.chiffre.bloque b{color:var(--gris)}
+.chiffre.plein b{color:var(--alerte)}
+.chambre-note{font-size:.8rem;color:var(--alerte);margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---- Formulaires d'action ---- */
+.formulaires{display:grid;grid-template-columns:1fr;gap:16px}
+.form-carte{border:1px solid var(--line);border-radius:3px;background:var(--papier);padding:20px}
+.form-carte h3{font-family:var(--serif);font-weight:400;font-size:1.25rem;color:var(--titre);margin-bottom:4px}
+.form-carte .sous{font-size:.82rem;color:var(--gris-2);margin-bottom:18px}
+.form-ligne{margin-bottom:14px}
+.form-duo{display:grid;grid-template-columns:1fr 92px;gap:12px}
+
+/* ---- Réservations ---- */
+.resa-tete{display:none}
+.resa{
+  border:1px solid var(--line);border-radius:3px;background:var(--papier);
+  padding:16px;margin-bottom:10px;
+}
+.cell{padding:3px 0;font-size:.9rem;color:var(--fonce);min-width:0;overflow-wrap:anywhere}
+.cell::before{
+  content:attr(data-k);display:block;
+  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-2);margin-bottom:1px;
+}
+.cell-nom{font-family:var(--serif);font-size:1.15rem;color:var(--titre);line-height:1.3}
+.cell-sous{display:block;font-family:var(--sans);font-size:.8rem;color:var(--brun-2);margin-top:2px}
+.cell-actions{display:flex;gap:8px;flex-wrap:wrap;padding-top:10px}
+.cell-actions::before{content:none}
+.cell-note{border-top:1px solid var(--line);margin-top:10px;padding-top:10px;font-size:.86rem;color:var(--ink);font-style:italic}
+.resa-vide{color:var(--gris-2);font-style:italic;padding:8px 0}
+
+.pastille{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--brun)}
+.pastille::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.p-payee{color:var(--brun)}
+.p-en-cours{color:var(--terra)}
+.p-bloquee{color:var(--gris)}
+.p-annulee,.p-liberee{color:var(--gris-2)}
+
+.filtres{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.filtre{border:1px solid var(--line);border-radius:100px;background:var(--papier);padding:6px 14px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brun-2);cursor:pointer;transition:border-color .2s,color .2s}
+.filtre[aria-pressed="true"]{border-color:var(--brun-2);color:var(--titre)}
+
+/* ---- Pied ---- */
+.pied{border-top:1px solid var(--line);padding:22px 20px 40px;text-align:center}
+.pied p{font-size:.74rem;letter-spacing:.06em;color:var(--gris-2)}
+
+/* ============================================================
+   MODALE + NOTIFICATION
+   ============================================================ */
+.modale{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px}
+.modale-fond{position:absolute;inset:0;background:rgba(46,42,41,.42)}
+.modale-carte{position:relative;width:100%;max-width:460px;background:var(--papier);border:1px solid var(--line);border-radius:3px;padding:28px 24px;max-height:88vh;overflow-y:auto}
+.modale-titre{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.2;color:var(--titre)}
+.modale-txt{font-size:.92rem;margin:14px 0 20px;color:var(--ink)}
+.modale-champ{margin-bottom:20px}
+.modale-btns{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+.notif{
+  position:fixed;left:20px;right:20px;bottom:20px;z-index:70;
+  background:var(--titre);color:#F6F1EC;border-radius:3px;
+  padding:14px 18px;font-size:.86rem;text-align:center;
+}
+.notif.echec{background:var(--alerte)}
+
+/* ============================================================
+   PLUS LARGE
+   ============================================================ */
+@media(min-width:620px){
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .formulaires{grid-template-columns:1fr 1fr}
+  .notif{left:auto;right:24px;max-width:420px;text-align:left}
+}
+@media(min-width:820px){
+  .tete-in,.onglets,.corps{padding-left:40px;padding-right:40px}
+  .tete-d{align-items:flex-end}
+  .pied{padding-left:40px;padding-right:40px}
+  .tete-titre{font-size:2rem}
+  .bandeau-t{font-size:2.6rem}
+}
+@media(min-width:1000px){
+  /* Le tableau des inscrites passe en lignes alignées. En dessous, ce sont
+     des fiches empilées : rien ne déborde jamais sur le côté. */
+  .resa-tete,.resa{
+    display:grid;
+    grid-template-columns:1.7fr 1.05fr 1.2fr .8fr .85fr .9fr .85fr 108px;
+    gap:14px;align-items:start;
+  }
+  .resa{padding:14px 16px}
+  .resa-tete{
+    background:none;border:none;padding:6px 16px;margin-bottom:2px;
+    font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-2);
+  }
+  .cell::before{content:none}
+  .cell{font-size:.84rem}
+  .cell-nom{font-size:1rem}
+  .cell-actions{padding-top:0;flex-direction:column;gap:6px}
+  .cell-note{grid-column:1 / -1;margin-top:4px}
+  .cell-vide{display:none}
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réserver votre séjour · Jade Maa</title>
+<meta name="description" content="Réservez votre place pour un séjour avec Jade Maa. Paiement sécurisé.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css?v=48">
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<!-- EN-TÊTE PRODUIT -->
+<section class="page-hero" style="padding-bottom:34px">
+  <div class="wrap">
+    <div class="breadcrumb reveal"><a href="index.html">Accueil</a> › <a href="retraites.html">Les séjours</a> › <span data-fil>Réserver</span></div>
+    <span class="eyebrow reveal" data-d="1" style="display:block;margin-top:14px">Réserver</span>
+    <h1 class="reveal" data-d="1">Réservez <em>votre place</em>.</h1>
+    <div class="hero-text">
+      <p class="lead reveal" data-d="2" data-chapo>Un instant, nous préparons votre réservation…</p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Filet de securite du paiement : quand le checkout integre ne peut pas
+   s'afficher (navigateur integre restrictif, bloqueur de contenu, reseau),
+   on ne laisse jamais un cul-de-sac. */
+.pay-secours{border:1px solid var(--line);border-radius:12px;background:#FFFEFC;padding:44px 26px;text-align:center}
+.pay-secours__t{color:var(--ink);font-size:.98rem;line-height:1.7;margin:0 auto 22px;max-width:36ch}
+.pay-secours__f{font-size:.78rem;color:var(--brun-2);margin:20px auto 0;max-width:40ch}
+.pay-secours__f a{text-decoration:underline}
+.pay-alt{text-align:center;font-size:.8rem;color:var(--brun-2);margin:16px 0 0}
+.pay-alt a{text-decoration:underline}
+/* Choix du mode de reglement, avant de monter le paiement : le montant de la
+   premiere echeance change la session Stripe, on ne la cree donc qu'une fois
+   le mode arrete. */
+.mode{display:grid;gap:8px;margin:0 0 18px}
+.mode label{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;border:1px solid var(--line);border-radius:3px;background:#FFFEFC;cursor:pointer}
+.mode label.is-choisie{border-color:var(--brun);background:var(--bg-2)}
+.mode input{margin-top:3px;accent-color:var(--brun)}
+.mode b{display:block;font-weight:400;font-size:.9rem;color:var(--ink)}
+.mode span{display:block;font-size:.78rem;color:var(--brun-2);margin-top:3px;line-height:1.5}
+</style>
+
+<!-- PAIEMENT -->
+<section class="section" id="paiement" style="padding-top:6px">
+  <div class="wrap">
+    <div class="pay-wrap reveal">
+      <aside class="pay-summary">
+        <div class="pay-price" data-prix>&nbsp;</div>
+        <ul data-recap></ul>
+        <p class="fineprint">Paiement sécurisé par Stripe. Une question&nbsp;? <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>.</p>
+      </aside>
+      <div class="pay-checkout">
+        <div data-etape-mode hidden>
+          <div class="mode" data-mode></div>
+          <a href="#" class="btn btn-dark" data-continuer>Continuer vers le paiement</a>
+        </div>
+        <div id="checkout"><div class="pay-loading">Chargement du paiement sécurisé…</div></div>
+        <p class="pay-alt" id="pay-alt" hidden></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/partials.js"></script>
+<script src="assets/app.js"></script>
+
+<!-- PAIEMENT INTÉGRÉ — Stripe Embedded Checkout, place tenue par l'API des sejours -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function(){
+  var STRIPE_PK = 'pk_live_51SoctOBzUtKi0psW6oexrpuq4Qbl0TQm8lEVIHCfN0S4GnE41o50czfPTKfFFHepKuQL4FtBG9K4S8o19P46VHHR00itLmrTVg';
+  var WA = '<a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>';
+
+  // Libelles tenus ici plutot que lus de l'API : la page doit savoir quoi
+  // afficher meme si l'API des places ne repond pas.
+  var SEJOURS = {
+    manoir: {
+      titre:'Revenir à l’essentiel', lieu:'Le Manoir Ducey · Normandie',
+      dates:'Du 21 au 25 octobre 2026', retour:'retraite-le-manoir.html',
+      fractionne:{ cle:'2x', libelle:'En 2 fois', detail:'Deux prélèvements, le second avant le 17 octobre.', limite:'2026-10-17' },
+      chambres:{
+        'partagee-5':{ t:'Chambre partagée à 5', d:'lit simple · sdb partagée', p:119000 },
+        'duo-simple':{ t:'Chambre duo', d:'lit simple · sdb partagée', p:119000 },
+        'duo-double':{ t:'Chambre duo', d:'lit double · sdb partagée', p:123000 },
+        'solo':{ t:'Chambre solo', d:'lit double · sdb partagée', p:128900 }
+      }
+    },
+    plessis: {
+      titre:'Le jour d’après', lieu:'Le Plessis-Placy · à 50 minutes de Paris',
+      dates:'Du 18 au 22 novembre 2026', retour:'retraite-le-plessis.html',
+      fractionne:{ cle:'3x', libelle:'En 3 fois', detail:'Trois prélèvements, le dernier début novembre.', limite:null },
+      chambres:{
+        'partagee-3-6':{ t:'Chambre partagée de 3 à 6', d:'lit simple · sdb partagée', p:119000 },
+        'duo-simple':{ t:'Chambre duo', d:'lit simple · sdb partagée', p:123000 },
+        'solo':{ t:'Chambre solo', d:'lit double · sdb privée', p:128900 }
+      }
+    }
+  };
+
+  // Espace normal comme separateur de milliers, pour rester identique aux prix
+  // ecrits en dur ailleurs sur le site (toLocaleString poserait une fine insecable).
+  var euros = function(c){ return String(c/100).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €'; };
+  var q = new URLSearchParams(location.search);
+  var idSejour = q.get('sejour'), idChambre = q.get('chambre');
+  var sejour = SEJOURS[idSejour];
+  var chambre = sejour && sejour.chambres[idChambre];
+
+  var mountEl = document.getElementById('checkout');
+  var prixEl = document.querySelector('[data-prix]');
+  var recapEl = document.querySelector('[data-recap]');
+  var chapoEl = document.querySelector('[data-chapo]');
+  var filEl = document.querySelector('[data-fil]');
+  var etapeMode = document.querySelector('[data-etape-mode]');
+  var modeEl = document.querySelector('[data-mode]');
+  var continuer = document.querySelector('[data-continuer]');
+
+  function ecran(html, avecPrix){
+    mountEl.innerHTML = '<div class="pay-secours"><p class="pay-secours__t">' + html + '</p>'
+      + '<p class="pay-secours__f">Une question&nbsp;? ' + WA + '.</p></div>';
+    if(etapeMode) etapeMode.hidden = true;
+    if(!avecPrix && prixEl) prixEl.textContent = '';
+  }
+
+  // Parametres absents ou inconnus : on renvoie choisir une chambre.
+  if(!sejour || !chambre){
+    if(chapoEl) chapoEl.textContent = 'Choisissez d’abord votre chambre sur la page du séjour.';
+    ecran('Cette page de réservation n’est pas complète. Revenez choisir votre chambre sur la page du séjour&nbsp;: '
+      + '<a href="retraites.html" style="text-decoration:underline">voir les séjours</a>.');
+    return;
+  }
+
+  document.title = 'Réserver · ' + sejour.titre + ' · Jade Maa';
+  if(filEl) filEl.textContent = 'Réserver · ' + sejour.titre;
+  if(chapoEl) chapoEl.textContent = sejour.titre + '. ' + sejour.dates + '. ' + sejour.lieu + '. Les places sont limitées.';
+  if(prixEl) prixEl.innerHTML = euros(chambre.p) + ' <small>/ personne</small>';
+  if(recapEl) recapEl.innerHTML = ['Séjour « ' + sejour.titre + ' »', sejour.dates, sejour.lieu,
+      chambre.t + ' (' + chambre.d + ')', 'Confirmation envoyée par email']
+      .map(function(x){ return '<li>' + x + '</li>'; }).join('');
+
+  // Le fractionne se ferme tout seul passe sa date limite, en heure de Paris.
+  function fractionneOuvert(){
+    var f = sejour.fractionne;
+    if(!f) return false;
+    if(!f.limite) return true;
+    var ajd = new Date().toLocaleDateString('fr-CA',{ timeZone:'Europe/Paris' });
+    return ajd <= f.limite;
+  }
+
+  var modeChoisi = 'integral';
+  function rendreModes(){
+    var opts = [{ cle:'integral', libelle:'En une fois', detail:'Le montant complet aujourd’hui.' }];
+    if(fractionneOuvert()) opts.push(sejour.fractionne);
+    if(opts.length < 2){ modeChoisi = 'integral'; return false; }
+    modeEl.innerHTML = opts.map(function(o,i){
+      return '<label class="' + (i===0?'is-choisie':'') + '"><input type="radio" name="mode" value="' + o.cle + '"' + (i===0?' checked':'') + '>'
+        + '<span><b>' + o.libelle + '</b><span>' + o.detail + '</span></span></label>';
+    }).join('');
+    modeEl.addEventListener('change', function(e){
+      modeChoisi = e.target.value;
+      [].forEach.call(modeEl.querySelectorAll('label'), function(l){ l.classList.toggle('is-choisie', l.querySelector('input').checked); });
+    });
+    return true;
+  }
+
+  function panne(){
+    ecran('Le paiement ne s’affiche pas dans votre navigateur. Écrivez-nous et nous vous envoyons un lien de paiement sécurisé.', true);
+  }
+  function complet(){
+    mountEl.innerHTML = '<div class="pay-complet"><span class="eyebrow">Complet</span>'
+      + '<p class="pay-complet__t">Cette chambre est complète.</p>'
+      + '<p>Il n’y a plus de place pour ce type de chambre. Les autres chambres encore disponibles sont sur la page du séjour&nbsp;: '
+      + '<a href="' + sejour.retour + '">' + sejour.titre + '</a>. Vous pouvez aussi nous écrire sur ' + WA + '.</p></div>';
+    mountEl.classList.add('is-complet');
+    if(etapeMode) etapeMode.hidden = true;
+    if(prixEl) prixEl.textContent = 'Complet';
+  }
+
+  async function monterPaiement(){
+    if(etapeMode) etapeMode.hidden = true;
+    mountEl.innerHTML = '<div class="pay-loading">Chargement du paiement sécurisé…</div>';
+    if(typeof Stripe === 'undefined' || !STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ panne(); return; }
+    var r, d;
+    // La session est demandee d'abord : c'est elle qui tient la place.
+    try{
+      r = await fetch('/api/sejour-checkout', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ sejour:idSejour, chambre:idChambre, paiement:modeChoisi })
+      });
+      d = await r.json();
+    }catch(e){ panne(); return; }
+    if(r.status === 409 || (d && d.soldOut)){ complet(); return; }
+    if(!r.ok || !d || !d.clientSecret){ panne(); return; }
+    try{
+      var stripe = Stripe(STRIPE_PK);
+      var checkout = await stripe.initEmbeddedCheckout({
+        fetchClientSecret: function(){ return Promise.resolve(d.clientSecret); }
+      });
+      mountEl.innerHTML = '';
+      checkout.mount('#checkout');
+      // Le mount peut ne rien lever et pourtant ne rien afficher (webview verrouillee).
+      setTimeout(function(){ if(!mountEl.querySelector('iframe')) panne(); }, 9000);
+    }catch(e){ panne(); }
+  }
+
+  // Un seul mode possible : on ne fait pas choisir pour rien.
+  if(rendreModes()){
+    etapeMode.hidden = false;
+    mountEl.innerHTML = '';
+    continuer.addEventListener('click', function(e){ e.preventDefault(); monterPaiement(); });
+  } else {
+    monterPaiement();
+  }
+})();
+</script>
+</body>
+</html>

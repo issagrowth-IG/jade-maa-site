@@ -369,11 +369,38 @@ h2.big{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.6
 .r-aside{position:sticky;top:110px;background:#FFFEFC;border:1px solid var(--line);border-radius:8px;padding:32px}
 .r-aside .price{font-family:var(--sans);font-weight:300;font-size:2rem;letter-spacing:.01em;color:var(--titre)}
 .r-aside .price small{font-size:.9rem;color:var(--brun-2)}
-.r-aside .rooms{margin:18px 0;border-top:1px solid var(--line)}
-.r-aside .rooms div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.9rem}
-.r-aside .rooms strong{white-space:nowrap}
-.r-aside .rooms em{display:block;font-style:normal;font-size:.78rem;color:var(--brun-2);margin-top:3px;line-height:1.5}
-.r-aside .rooms span{color:var(--ink)}
+/* Selecteur de chambre. Chaque type est un choix a part entiere avec son prix
+   et sa disponibilite : le prix affiche en haut suit la selection. Sans reponse
+   de l'API des places, tout reste selectionnable (mieux vaut un choix ouvert
+   qu'un « complet » affiche a tort). */
+.r-aside .rooms-t{font-size:1.15rem;margin:20px 0 2px;color:var(--titre)}
+.r-aside .rooms-sub{font-size:.8rem;color:var(--brun-2);margin:0 0 14px;line-height:1.6}
+.r-aside .rooms{margin:0 0 16px;display:grid;gap:8px}
+.room{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;border:1px solid var(--line);border-radius:3px;background:#FFFEFC;cursor:pointer;transition:border-color .18s,background .18s}
+.room:hover{border-color:var(--rose)}
+.room input{position:absolute;opacity:0;width:0;height:0}
+.room__r{flex:0 0 auto;width:16px;height:16px;margin-top:2px;border:1px solid var(--brun-2);border-radius:50%;position:relative}
+.room__r::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--brun);opacity:0;transition:opacity .15s}
+.room.is-choisie{border-color:var(--brun);background:var(--bg-2)}
+.room.is-choisie .room__r::after{opacity:1}
+.room input:focus-visible ~ .room__r{outline:2px solid var(--brun);outline-offset:2px}
+.room__c{flex:1 1 auto;min-width:0}
+.room__t{display:block;font-size:.9rem;color:var(--ink);line-height:1.45}
+.room__d{display:block;font-style:normal;font-size:.78rem;color:var(--brun-2);margin-top:3px;line-height:1.5}
+.room__s{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--terra);margin-top:6px}
+.room__p{flex:0 0 auto;white-space:nowrap;font-size:.9rem;color:var(--ink);align-self:center}
+.room.is-complet{cursor:not-allowed;border-color:var(--line);background:transparent}
+.room.is-complet .room__t,.room.is-complet .room__d,.room.is-complet .room__p{color:var(--brun-2);opacity:.55}
+.room.is-complet .room__s{color:var(--brun-2)}
+.room.is-complet .room__r{opacity:.4}
+/* Case des conditions de vente : le bouton d'inscription reste inerte tant
+   qu'elle n'est pas cochee, et le dit, plutot que de ne rien faire au clic. */
+.cgv{display:flex;align-items:flex-start;gap:10px;margin:0 0 14px;font-size:.8rem;color:var(--brun-2);line-height:1.6;cursor:pointer}
+.cgv input{flex:0 0 auto;width:15px;height:15px;margin-top:2px;accent-color:var(--brun)}
+.cgv a{color:var(--brun);text-decoration:underline}
+.btn.is-bloque{opacity:.45;cursor:not-allowed}
+.cgv-rappel{font-size:.76rem;color:var(--terra);margin:-8px 0 12px}
+@media(max-width:400px){.room{padding:12px}.room__p{align-self:flex-start;margin-top:1px}}
 /* text-align en plus de justify-content : le second centre la boite flex,
    pas les lignes du libelle quand il passe sur deux lignes. */
 .r-aside .btn{width:100%;justify-content:center;text-align:center;margin-bottom:10px}

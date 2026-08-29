@@ -13,8 +13,8 @@
 <body class="has-sticky">
 <div id="nav-mount"></div>
 <div class="r-sticky-bar">
-  <div class="px">Dès 1 190 € <small>/ pers</small></div>
-  <a href="#reserver" class="btn btn-dark">Je m'inscris</a>
+  <div class="px"><span data-prix-sticky>Dès 1 190 €</span> <small>/ pers</small></div>
+  <a href="#chambres" class="btn btn-dark">Je m'inscris</a>
 </div>
 
 <!-- HERO VISUEL -->
@@ -75,16 +75,48 @@
 
       <!-- ASIDE -->
       <aside class="r-aside reveal" data-d="1">
-        <div class="price">À partir de 1 190 € <small>/ personne</small></div>
-        <div class="rooms">
-          <div><span>Chambre partagée de 3 à 6<em>lit simple · sdb partagée</em></span><strong>1 190 €</strong></div>
-          <div><span>Chambre duo<em>lit simple · sdb partagée</em></span><strong>1 230 €</strong></div>
-          <div><span>Chambre solo<em>lit double · sdb privée</em></span><strong>1 289 €</strong></div>
+        <div class="price"><span data-prix-tete>À partir de 1 190 €</span> <small>/ personne</small></div>
+        <h2 class="rooms-t" id="chambres">Choisis ta chambre</h2>
+        <p class="rooms-sub">Le prix et les disponibilités s'actualisent automatiquement.</p>
+        <div class="rooms" data-sejour="plessis">
+          <label class="room">
+            <input type="radio" name="chambre" value="partagee-3-6" data-prix="1 190 €">
+            <span class="room__r" aria-hidden="true"></span>
+            <span class="room__c">
+              <span class="room__t">Chambre partagée de 3 à 6</span>
+              <em class="room__d">lit simple · sdb partagée</em>
+              <span class="room__s"></span>
+            </span>
+            <strong class="room__p">1 190 €</strong>
+          </label>
+          <label class="room">
+            <input type="radio" name="chambre" value="duo-simple" data-prix="1 230 €">
+            <span class="room__r" aria-hidden="true"></span>
+            <span class="room__c">
+              <span class="room__t">Chambre duo</span>
+              <em class="room__d">lit simple · sdb partagée</em>
+              <span class="room__s"></span>
+            </span>
+            <strong class="room__p">1 230 €</strong>
+          </label>
+          <label class="room">
+            <input type="radio" name="chambre" value="solo" data-prix="1 289 €">
+            <span class="room__r" aria-hidden="true"></span>
+            <span class="room__c">
+              <span class="room__t">Chambre solo</span>
+              <em class="room__d">lit double · sdb privée</em>
+              <span class="room__s"></span>
+            </span>
+            <strong class="room__p">1 289 €</strong>
+          </label>
         </div>
-        <p class="muted" style="font-size:.86rem;margin:0 0 10px">Chambre partagée avec les autres participantes, dans une atmosphère conviviale et chaleureuse.</p>
-        <p class="muted" style="font-size:.86rem;margin:0 0 10px">Chambre solo : chambre individuelle pour profiter d'un espace entièrement à toi pendant le séjour.</p>
-        <p class="muted" style="font-size:.86rem;margin:0 0 14px">Les chambres individuelles sont disponibles en nombre limité et attribuées selon l'ordre des inscriptions.</p>
-        <a href="#reserver" class="btn btn-dark">Je m'inscris</a>
+        <p class="muted" style="font-size:.86rem;margin:0 0 14px">Les chambres sont attribuées selon l'ordre des inscriptions.</p>
+        <label class="cgv">
+          <input type="checkbox" data-cgv>
+          <span>J'ai lu et j'accepte les <a href="cgv.html" target="_blank" rel="noopener">conditions générales de vente</a>.</span>
+        </label>
+        <p class="cgv-rappel" data-cgv-rappel hidden>Merci d'accepter les conditions générales de vente pour continuer.</p>
+        <a href="reserver.html?sejour=plessis" class="btn btn-dark is-bloque" data-reserver aria-disabled="true">Je m'inscris</a>
         <a href="https://wa.me/33699023187" target="_blank" rel="noopener" class="btn btn-ghost">Une question sur WhatsApp</a>
         <p class="fineprint" style="margin-top:14px">Le tarif comprend l'hébergement, l'ensemble des repas, les ateliers, les pratiques de sophrologie ainsi que les activités prévues pendant le séjour.</p>
         <div class="contact-team">
