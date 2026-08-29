@@ -1,0 +1,32 @@
+# Worker dédié au compteur de places des séjours.
+# Il n'existe que pour héberger la classe Durable Object : un projet Pages peut
+# se LIER à un Durable Object mais ne peut pas en définir un, la classe doit vivre
+# dans un Worker à part (doc Cloudflare, Pages > Functions > Bindings).
+# Le site jade-maa-site s'y branche par `script_name = "jade-stock-sejours"`.
+
+name = "jade-stock-sejours"
+main = "src/index.js"
+# >= 2024-04-03 : active l'appel RPC direct des méthodes du Durable Object
+# (stub.prendre(...)) au lieu de tout faire passer par un fetch() maison.
+compatibility_date = "2026-08-01"
+
+# Un objet par séjour, nommé par l'identifiant du séjour (manoir, plessis).
+[[durable_objects.bindings]]
+name = "STOCK_SEJOURS"
+class_name = "StockSejour"
+
+# Backend SQLite : seul backend ouvert aux nouveaux namespaces, et surtout le seul
+# qui expose une API de stockage SYNCHRONE. C'est ce qui permet d'écrire une prise
+# de place sans le moindre await entre le comptage et l'écriture.
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["StockSejour"]
+
+# Filet de sécurité : réconciliation avec Stripe toutes les 15 minutes.
+# Les Cron Triggers n'existent pas sur Pages, c'est une raison de plus d'avoir
+# ce worker à part.
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Secrets à poser (wrangler secret put …) : STRIPE_KEY, STOCK_SECRET,
+# et éventuellement SLACK_WEBHOOK_SEJOURS / SLACK_WEBHOOK.

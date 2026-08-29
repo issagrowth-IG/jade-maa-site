@@ -36,15 +36,6 @@
 .pay-secours__f a{text-decoration:underline}
 .pay-alt{text-align:center;font-size:.8rem;color:var(--brun-2);margin:16px 0 0}
 .pay-alt a{text-decoration:underline}
-/* Choix du mode de reglement, avant de monter le paiement : le montant de la
-   premiere echeance change la session Stripe, on ne la cree donc qu'une fois
-   le mode arrete. */
-.mode{display:grid;gap:8px;margin:0 0 18px}
-.mode label{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;border:1px solid var(--line);border-radius:3px;background:#FFFEFC;cursor:pointer}
-.mode label.is-choisie{border-color:var(--brun);background:var(--bg-2)}
-.mode input{margin-top:3px;accent-color:var(--brun)}
-.mode b{display:block;font-weight:400;font-size:.9rem;color:var(--ink)}
-.mode span{display:block;font-size:.78rem;color:var(--brun-2);margin-top:3px;line-height:1.5}
 </style>
 
 <!-- PAIEMENT -->
@@ -57,10 +48,6 @@
         <p class="fineprint">Paiement sécurisé par Stripe. Une question&nbsp;? <a href="https://wa.me/33699023187" target="_blank" rel="noopener" style="text-decoration:underline">WhatsApp</a>.</p>
       </aside>
       <div class="pay-checkout">
-        <div data-etape-mode hidden>
-          <div class="mode" data-mode></div>
-          <a href="#" class="btn btn-dark" data-continuer>Continuer vers le paiement</a>
-        </div>
         <div id="checkout"><div class="pay-loading">Chargement du paiement sécurisé…</div></div>
         <p class="pay-alt" id="pay-alt" hidden></p>
       </div>
@@ -85,7 +72,6 @@
     manoir: {
       titre:'Revenir à l’essentiel', lieu:'Le Manoir Ducey · Normandie',
       dates:'Du 21 au 25 octobre 2026', retour:'retraite-le-manoir.html',
-      fractionne:{ cle:'2x', libelle:'En 2 fois', detail:'Deux prélèvements, le second avant le 17 octobre.', limite:'2026-10-17' },
       chambres:{
         'partagee-5':{ t:'Chambre partagée à 5', d:'lit simple · sdb partagée', p:119000 },
         'duo-simple':{ t:'Chambre duo', d:'lit simple · sdb partagée', p:119000 },
@@ -96,7 +82,6 @@
     plessis: {
       titre:'Le jour d’après', lieu:'Le Plessis-Placy · à 50 minutes de Paris',
       dates:'Du 18 au 22 novembre 2026', retour:'retraite-le-plessis.html',
-      fractionne:{ cle:'3x', libelle:'En 3 fois', detail:'Trois prélèvements, le dernier début novembre.', limite:null },
       chambres:{
         'partagee-3-6':{ t:'Chambre partagée de 3 à 6', d:'lit simple · sdb partagée', p:119000 },
         'duo-simple':{ t:'Chambre duo', d:'lit simple · sdb partagée', p:123000 },
@@ -118,14 +103,10 @@
   var recapEl = document.querySelector('[data-recap]');
   var chapoEl = document.querySelector('[data-chapo]');
   var filEl = document.querySelector('[data-fil]');
-  var etapeMode = document.querySelector('[data-etape-mode]');
-  var modeEl = document.querySelector('[data-mode]');
-  var continuer = document.querySelector('[data-continuer]');
 
   function ecran(html, avecPrix){
     mountEl.innerHTML = '<div class="pay-secours"><p class="pay-secours__t">' + html + '</p>'
       + '<p class="pay-secours__f">Une question&nbsp;? ' + WA + '.</p></div>';
-    if(etapeMode) etapeMode.hidden = true;
     if(!avecPrix && prixEl) prixEl.textContent = '';
   }
 
@@ -145,31 +126,6 @@
       chambre.t + ' (' + chambre.d + ')', 'Confirmation envoyée par email']
       .map(function(x){ return '<li>' + x + '</li>'; }).join('');
 
-  // Le fractionne se ferme tout seul passe sa date limite, en heure de Paris.
-  function fractionneOuvert(){
-    var f = sejour.fractionne;
-    if(!f) return false;
-    if(!f.limite) return true;
-    var ajd = new Date().toLocaleDateString('fr-CA',{ timeZone:'Europe/Paris' });
-    return ajd <= f.limite;
-  }
-
-  var modeChoisi = 'integral';
-  function rendreModes(){
-    var opts = [{ cle:'integral', libelle:'En une fois', detail:'Le montant complet aujourd’hui.' }];
-    if(fractionneOuvert()) opts.push(sejour.fractionne);
-    if(opts.length < 2){ modeChoisi = 'integral'; return false; }
-    modeEl.innerHTML = opts.map(function(o,i){
-      return '<label class="' + (i===0?'is-choisie':'') + '"><input type="radio" name="mode" value="' + o.cle + '"' + (i===0?' checked':'') + '>'
-        + '<span><b>' + o.libelle + '</b><span>' + o.detail + '</span></span></label>';
-    }).join('');
-    modeEl.addEventListener('change', function(e){
-      modeChoisi = e.target.value;
-      [].forEach.call(modeEl.querySelectorAll('label'), function(l){ l.classList.toggle('is-choisie', l.querySelector('input').checked); });
-    });
-    return true;
-  }
-
   function panne(){
     ecran('Le paiement ne s’affiche pas dans votre navigateur. Écrivez-nous et nous vous envoyons un lien de paiement sécurisé.', true);
   }
@@ -179,12 +135,10 @@
       + '<p>Il n’y a plus de place pour ce type de chambre. Les autres chambres encore disponibles sont sur la page du séjour&nbsp;: '
       + '<a href="' + sejour.retour + '">' + sejour.titre + '</a>. Vous pouvez aussi nous écrire sur ' + WA + '.</p></div>';
     mountEl.classList.add('is-complet');
-    if(etapeMode) etapeMode.hidden = true;
     if(prixEl) prixEl.textContent = 'Complet';
   }
 
   async function monterPaiement(){
-    if(etapeMode) etapeMode.hidden = true;
     mountEl.innerHTML = '<div class="pay-loading">Chargement du paiement sécurisé…</div>';
     if(typeof Stripe === 'undefined' || !STRIPE_PK || STRIPE_PK.indexOf('pk_') !== 0){ panne(); return; }
     var r, d;
@@ -192,7 +146,7 @@
     try{
       r = await fetch('/api/sejour-checkout', {
         method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ sejour:idSejour, chambre:idChambre, paiement:modeChoisi })
+        body: JSON.stringify({ sejour:idSejour, chambre:idChambre })
       });
       d = await r.json();
     }catch(e){ panne(); return; }
@@ -210,14 +164,8 @@
     }catch(e){ panne(); }
   }
 
-  // Un seul mode possible : on ne fait pas choisir pour rien.
-  if(rendreModes()){
-    etapeMode.hidden = false;
-    mountEl.innerHTML = '';
-    continuer.addEventListener('click', function(e){ e.preventDefault(); monterPaiement(); });
-  } else {
-    monterPaiement();
-  }
+  // Reglement comptant, en une seule fois : rien a choisir, on monte le paiement.
+  monterPaiement();
 })();
 </script>
 </body>
