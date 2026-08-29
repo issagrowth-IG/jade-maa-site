@@ -13,7 +13,7 @@
   var etats = {};            // sejour -> dernier état connu
   var horodatage = null;     // date de la dernière lecture réussie
   var brouillon = {};        // ce que l'utilisatrice est en train de saisir
-  var filtre = 'toutes';
+  var filtre = 'actives';
   var enCours = false;
 
   var LIBELLES_PAIEMENT = {
@@ -181,8 +181,15 @@
   function sommeQuotas(e) {
     return e.chambres.reduce(function (n, c) { return n + c.quota; }, 0);
   }
+  /* Le « restantes » que renvoie le moteur est DEJA borné par la capacité
+     globale : au Plessis une chambre peut afficher 0 alors que son quota n'est
+     pas atteint. Pour rendre les deux plafonds visibles, l'écran recalcule le
+     nombre de lits libres du type, qui lui ne dépend que du quota. */
+  function surTypeDe(c) { return Math.max(0, c.quota - c.vendues - c.tenues); }
+  function vendablesDe(e, c) { return Math.min(surTypeDe(c), e.restantesGlobal); }
+
   function litsLibresParType(e) {
-    return e.chambres.reduce(function (n, c) { return n + c.restantes; }, 0);
+    return e.chambres.reduce(function (n, c) { return n + surTypeDe(c); }, 0);
   }
   function bloqueesPar(e, chambreId) {
     return (e.reservations || []).filter(function (r) {
@@ -203,6 +210,15 @@
     var b = el('section', 'bloc');
     b.appendChild(el('h2', 'bandeau-t', e.titre || nomSejour(e.sejour)));
     b.appendChild(el('p', 'bandeau-s', [e.dates, e.lieu].filter(Boolean).join(' · ')));
+
+    if (e.demo) {
+      var faux = el('div', 'encadre encadre-alerte');
+      faux.appendChild(el('p', 'encadre-t', 'Attention : données de démonstration'));
+      faux.appendChild(el('p', null,
+        'Le stock réel n’est pas branché. Les noms et les chiffres affichés ici sont inventés, '
+        + 'et rien de ce que vous faites sur cet écran n’a d’effet sur le site. Prévenez Issa.'));
+      b.appendChild(faux);
+    }
 
     var bloquees = bloqueesPar(e);
     var stats = el('div', 'stats');
@@ -278,20 +294,21 @@
       carte.appendChild(jauge);
 
       var bloquees = bloqueesPar(e, c.id);
-      var vendables = Math.min(c.restantes, e.restantesGlobal);
+      var surType = surTypeDe(c);
+      var vendables = vendablesDe(e, c);
 
       var ch = el('div', 'chiffres');
       ch.appendChild(chiffre('Quota', c.quota));
       ch.appendChild(chiffre('Vendues', c.vendues));
       if (bloquees) ch.appendChild(chiffre('Dont bloquées', bloquees, 'bloque'));
       ch.appendChild(chiffre('Paiement en cours', c.tenues));
-      ch.appendChild(chiffre('Libres sur ce type', c.restantes));
+      ch.appendChild(chiffre('Libres sur ce type', surType));
       ch.appendChild(chiffre('Vendables maintenant', vendables, vendables === 0 ? 'plein' : null));
       carte.appendChild(ch);
 
-      if (vendables < c.restantes) {
+      if (vendables < surType) {
         carte.appendChild(el('p', 'chambre-note',
-          'Plafond global atteint : ' + pluriel(c.restantes, 'lit libre', 'lits libres')
+          'Plafond global atteint : ' + pluriel(surType, 'lit libre', 'lits libres')
           + ' sur ce type, mais rien n’est vendable tant qu’une place n’est pas libérée.'));
       }
       b.appendChild(carte);
@@ -330,7 +347,10 @@
     e.chambres.forEach(function (c) {
       var o = document.createElement('option');
       o.value = c.id;
-      o.textContent = c.libelle + ' (' + c.detail + ') · ' + texteOption(c);
+      // Volontairement court : sur un telephone, un select tronque la fin.
+      // On garde de quoi distinguer les deux chambres duo, et le chiffre utile.
+      var court = String(c.detail || '').split('·')[0].trim();
+      o.textContent = c.libelle + (court ? ', ' + court : '') + ' · ' + texteOption(c);
       s.appendChild(o);
     });
     if (valeur) s.value = valeur;
@@ -353,7 +373,7 @@
     carte.appendChild(el('p', 'sous', 'Pour une invitée, un virement reçu à côté du site, une place gardée. Le motif est obligatoire.'));
 
     var sel = selectChambre(e, 'bloq-chambre', d.chambre, function (c) {
-      return pluriel(Math.min(c.restantes, e.restantesGlobal), 'place vendable', 'places vendables');
+      return pluriel(vendablesDe(e, c), 'vendable', 'vendables');
     });
     carte.appendChild(ligneChamp('Type de chambre', 'bloq-chambre', sel));
 
@@ -410,7 +430,7 @@
     carte.appendChild(el('p', 'sous', 'Uniquement des places bloquées. Pour annuler l’inscription d’une personne, utilise le bouton Libérer sur sa ligne, plus bas.'));
 
     var sel = selectChambre(e, 'lib-chambre', d.chambre, function (c) {
-      return pluriel(bloqueesPar(e, c.id), 'place bloquée', 'places bloquées');
+      return pluriel(bloqueesPar(e, c.id), 'bloquée', 'bloquées');
     });
     carte.appendChild(ligneChamp('Type de chambre', 'lib-chambre', sel));
 
@@ -451,11 +471,12 @@
 
   /* ---- Liste des inscrites ---- */
   var FILTRES = [
-    { id: 'toutes', t: 'Tout' },
+    { id: 'actives', t: 'Places occupées' },
     { id: 'payee', t: 'Inscrites' },
     { id: 'en-cours', t: 'Paiement en cours' },
     { id: 'bloquee', t: 'Places bloquées' },
     { id: 'sorties', t: 'Annulées et libérées' },
+    { id: 'toutes', t: 'Tout' },
   ];
 
   function blocResas(e) {
@@ -474,6 +495,7 @@
 
     var lignes = (e.reservations || []).filter(function (r) {
       if (filtre === 'toutes') return true;
+      if (filtre === 'actives') return r.etat === 'payee' || r.etat === 'en-cours' || r.etat === 'bloquee';
       if (filtre === 'sorties') return r.etat === 'annulee' || r.etat === 'liberee';
       return r.etat === filtre;
     }).sort(function (a, z) { return String(z.cree).localeCompare(String(a.cree)); });
@@ -496,7 +518,8 @@
     var n = el('article', 'resa');
 
     var cNom = cellule('Inscrite', null);
-    var titre = el('span', 'cell-nom', r.nom || (r.etat === 'bloquee' ? 'Place bloquée' : 'Sans nom'));
+    var horsVente = r.etat === 'bloquee' || r.etat === 'liberee';
+    var titre = el('span', 'cell-nom', r.nom || (horsVente ? 'Place hors vente en ligne' : 'Sans nom'));
     cNom.appendChild(titre);
     if (r.email) titre.appendChild(el('span', 'cell-sous', r.email));
     n.appendChild(cNom);
@@ -708,7 +731,7 @@
   Array.prototype.forEach.call($('onglets').querySelectorAll('.onglet'), function (bt) {
     bt.addEventListener('click', function () {
       sejourActif = bt.getAttribute('data-sejour');
-      filtre = 'toutes';
+      filtre = 'actives';
       brouillon = {};
       Array.prototype.forEach.call($('onglets').querySelectorAll('.onglet'), function (autre) {
         if (autre === bt) autre.setAttribute('aria-current', 'true');

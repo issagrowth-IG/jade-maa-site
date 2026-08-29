@@ -166,8 +166,10 @@ textarea.champ{resize:vertical;line-height:1.6}
 .resa-tete{display:none}
 .resa{
   border:1px solid var(--line);border-radius:3px;background:var(--papier);
-  padding:16px;margin-bottom:10px;
+  padding:14px 16px;margin-bottom:10px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;align-items:start;
 }
+.resa>.cell:first-child,.resa>.cell-actions,.resa>.cell-note{grid-column:1 / -1}
 .cell{padding:3px 0;font-size:.9rem;color:var(--fonce);min-width:0;overflow-wrap:anywhere}
 .cell::before{
   content:attr(data-k);display:block;
@@ -216,6 +218,19 @@ textarea.champ{resize:vertical;line-height:1.6}
 /* ============================================================
    PLUS LARGE
    ============================================================ */
+@media(max-width:619px){
+  .tete-in{flex-direction:column;gap:10px;padding:14px 20px}
+  .tete .eyebrow{display:none}
+  .tete-titre{font-size:1.3rem;margin-top:0}
+  .tete-d{flex-direction:column;align-items:flex-start;width:100%;gap:8px}
+  .tete-btns{width:100%;flex-wrap:nowrap;gap:8px}
+  .maj{font-size:.62rem;line-height:1.4}
+  .btn{padding:9px 13px;font-size:.62rem;letter-spacing:.14em}
+  .onglet{margin-right:16px;padding-top:6px;padding-bottom:10px}
+  .onglet-t{font-size:1rem}
+  .onglet-s{font-size:.58rem}
+}
+
 @media(min-width:620px){
   .stats{grid-template-columns:repeat(4,1fr)}
   .formulaires{grid-template-columns:1fr 1fr}
@@ -233,7 +248,7 @@ textarea.champ{resize:vertical;line-height:1.6}
      des fiches empilées : rien ne déborde jamais sur le côté. */
   .resa-tete,.resa{
     display:grid;
-    grid-template-columns:1.7fr 1.05fr 1.2fr .8fr .85fr .9fr .85fr 108px;
+    grid-template-columns:1.6fr .95fr 1.1fr .7fr .76fr .98fr .76fr 152px;
     gap:14px;align-items:start;
   }
   .resa{padding:14px 16px}
@@ -241,10 +256,13 @@ textarea.champ{resize:vertical;line-height:1.6}
     background:none;border:none;padding:6px 16px;margin-bottom:2px;
     font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-2);
   }
+  /* Le plein-largeur du mobile ne vaut plus : chaque cellule reprend sa colonne. */
+  .resa>.cell:first-child,.resa>.cell-actions{grid-column:auto}
   .cell::before{content:none}
   .cell{font-size:.84rem}
   .cell-nom{font-size:1rem}
   .cell-actions{padding-top:0;flex-direction:column;gap:6px}
+  .cell-actions .btn{width:100%}
   .cell-note{grid-column:1 / -1;margin-top:4px}
   .cell-vide{display:none}
 }
