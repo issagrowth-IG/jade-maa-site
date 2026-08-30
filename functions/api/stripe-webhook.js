@@ -6,15 +6,36 @@
    Env : STRIPE_WEBHOOK_SECRET (whsec_…), GHL_PIT, GHL_LOCATION_ID. */
 
 import { SUBJECT, HTML } from './_conf-email.js';
+import { SUBJECT as SUBJECT_ATELIER, HTML as HTML_ATELIER } from './_atelier-email.js';
 import { CAP_LYON, EVENT_LYON, comptePlacesVendues } from './_places.js';
 
 const GHL = 'https://services.leadconnectorhq.com';
 
-// Clé (payment_link OU metadata.event du checkout intégré) → tag GHL. Une ligne par événement payant.
-const EVENT_TAGS = {
-  'plink_1U8QhlBzUtKi0psWF9H9CMzd': 'conf-lyon-07-nov-paye', // Payment Link 79 € (fallback)
-  'plink_1U80kwBzUtKi0psW96QQPCyB': 'conf-lyon-07-nov-paye', // Payment Link 69 € (désactivé le 25/08)
-  'conf-lyon-07-nov': 'conf-lyon-07-nov-paye',               // checkout intégré (metadata.event)
+const LYON = {
+  tag: 'conf-lyon-07-nov-paye',
+  tags: ['conference-valise'],
+  subject: SUBJECT, html: HTML,
+  source: 'Stripe · Conférence « Dans ma valise, il y a… » (payé)',
+};
+
+const ATELIER = {
+  tag: 'atelier-caritatif-paye',
+  tags: ['atelier-caritatif'],
+  subject: SUBJECT_ATELIER, html: HTML_ATELIER,
+  source: 'Stripe · Atelier caritatif (payé)',
+};
+
+// Clé (payment_link OU metadata.event du checkout intégré) → configuration de l'événement.
+// Une ligne par événement payant.
+// ⚠️ Ce webhook reçoit TOUS les checkout.session.completed du compte Stripe, séjours et
+// ventes hors événement compris. Une clé absente de cette table n'est pas traitée : sans
+// ce filtre, un paiement inconnu recevait le mail de la conférence de Lyon.
+const EVENTS = {
+  'plink_1U8QhlBzUtKi0psWF9H9CMzd': LYON,    // Payment Link 79 € (fallback)
+  'plink_1U80kwBzUtKi0psW96QQPCyB': LYON,    // Payment Link 69 € (désactivé le 25/08)
+  'conf-lyon-07-nov': LYON,                  // checkout intégré (metadata.event)
+  'plink_1UACvbBzUtKi0psWqEUKvu34': ATELIER, // Payment Link atelier caritatif 10 €
+  'atelier-caritatif': ATELIER,              // metadata.event
 };
 
 const json = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { 'Content-Type': 'application/json' } });
@@ -69,14 +90,19 @@ export async function onRequestPost({ request, env }) {
   if (!email) { console.error('stripe-webhook: session sans email'); return json({ received: true }); }
 
   const eventKey = s.payment_link || (s.metadata && s.metadata.event) || '';
-  const tag = EVENT_TAGS[eventKey] || 'conference-valise-paye';
+  const conf = EVENTS[eventKey] || EVENTS[(s.metadata && s.metadata.event) || ''];
+  if (!conf) {
+    console.warn('stripe-webhook: paiement ignoré, événement inconnu', eventKey);
+    return json({ received: true, ignored: eventKey || 'sans-cle' });
+  }
+  const tag = conf.tag;
 
   const headers = { Authorization: `Bearer ${env.GHL_PIT}`, Version: '2021-07-28', 'Content-Type': 'application/json' };
   const body = {
     locationId: env.GHL_LOCATION_ID,
     firstName, lastName, email,
     ...(phone ? { phone } : {}),
-    source: 'Stripe · Conférence « Dans ma valise, il y a… » (payé)',
+    source: conf.source,
   };
 
   let up;
@@ -100,7 +126,7 @@ export async function onRequestPost({ request, env }) {
   if (!id) { console.error('stripe-webhook: upsert sans id'); return json({ error: 'crm' }, 502); }
 
   const tr = await fetch(`${GHL}/contacts/${id}/tags`, {
-    method: 'POST', headers, body: JSON.stringify({ tags: ['conference-valise', tag] }),
+    method: 'POST', headers, body: JSON.stringify({ tags: [...conf.tags, tag] }),
   }).catch(() => null);
   if (!tr || !tr.ok) {
     console.error('stripe-webhook: tag non posé', tr && tr.status);
@@ -131,7 +157,7 @@ export async function onRequestPost({ request, env }) {
     const em = await fetch(`${GHL}/conversations/messages`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${env.GHL_PIT}`, Version: '2021-04-15', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'Email', contactId: id, subject: SUBJECT, html: HTML }),
+      body: JSON.stringify({ type: 'Email', contactId: id, subject: conf.subject, html: conf.html }),
     });
     if (!em.ok) console.error('stripe-webhook: email GHL refusé', em.status, await em.text().catch(() => ''));
   } catch (e) {
