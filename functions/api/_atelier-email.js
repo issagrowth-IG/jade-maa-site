@@ -2,7 +2,7 @@
    Source éditable : portfolio/jade/evenements/atelier-solidaire/mail-confirmation.html
    Le lien d'accès est celui de la salle WebinarJam. */
 
-export const SUBJECT = 'Votre place est réservée · votre lien d\'accès à l\'atelier';
+export const SUBJECT = 'Votre place est réservée · rendez-vous jeudi 3 septembre à 21h';
 
 export const LIEN = 'https://event.webinarjam.com/wql1x1/go/live/pkz5x5umigs6sq';
 
@@ -33,6 +33,15 @@ export const HTML = `<!DOCTYPE html>
       <div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:#3D3532;max-width:460px;">Votre participation a bien été reçue, et elle sera intégralement reversée. Voici votre lien d'accès à l'atelier.</div>
     </td></tr>
 
+    <tr><td style="padding:0 0 26px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F5F1ED;border:1px solid #E7DDD6;">
+        <tr><td align="center" style="padding:24px 20px;">
+          <div style="font-family:Georgia,'Cormorant Garamond',serif;font-size:26px;line-height:1.25;color:#2E2A29;">Jeudi 3 septembre</div>
+          <div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:2.6px;text-transform:uppercase;color:#8A6553;font-weight:bold;padding-top:10px;">21h &middot; en ligne</div>
+        </td></tr>
+      </table>
+    </td></tr>
+
     <tr><td style="padding:0 0 34px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border:1px solid #E7DDD6;">
         <tr><td align="center" style="padding:32px 26px;">
@@ -57,9 +66,9 @@ export const HTML = `<!DOCTYPE html>
 
     <tr><td style="padding:0 6px 10px;">
       <div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.75;color:#3D3532;">
-        <p style="margin:0 0 18px;"><b style="color:#2E2A29;">Gardez ce lien près de vous.</b> C'est lui qui ouvrira l'atelier le jour venu. Le plus simple est de garder cet email sous la main.</p>
-        <p style="margin:0 0 18px;"><b style="color:#2E2A29;">Le jour de l'atelier, il n'y a rien d'autre à faire.</b> Vous cliquez sur ce lien au moment venu et vous entrez directement. Rien à installer, rien à créer.</p>
-        <p style="margin:0;"><b style="color:#2E2A29;">Connectez-vous quelques minutes en avance.</b> Cela vous laisse le temps de vous installer au calme avant le début.</p>
+        <p style="margin:0 0 18px;"><b style="color:#2E2A29;">Gardez ce lien près de vous.</b> C'est lui qui ouvrira l'atelier jeudi soir. Le plus simple est de garder cet email sous la main.</p>
+        <p style="margin:0 0 18px;"><b style="color:#2E2A29;">Jeudi soir, il n'y a rien d'autre à faire.</b> Vous cliquez sur ce lien à 21h et vous entrez directement. Rien à installer, rien à créer.</p>
+        <p style="margin:0;"><b style="color:#2E2A29;">Connectez-vous quelques minutes en avance.</b> Cela vous laisse le temps de vous installer au calme avant 21h.</p>
       </div>
     </td></tr>
 
