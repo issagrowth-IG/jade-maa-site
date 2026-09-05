@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Le jour d'après · Le Plessis-Placy · Jade Maa</title>
-<meta name="description" content="Séjour « Le jour d'après » au Plessis-Placy, du 18 au 22 novembre 2026. Cinq jours pour traverser la rupture, te retrouver et regarder vers la suite. Places limitées, femmes exclusivement. 1 190 €.">
+<meta name="description" content="Séjour « Le jour d'après » au Plessis-Placy, à 50 minutes de Paris, du 18 au 22 novembre 2026. Cinq jours pour traverser la rupture, te retrouver et regarder vers la suite. Places limitées, femmes exclusivement. À partir de 1 190 €.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Allison&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=47">
+<link rel="stylesheet" href="assets/app.css?v=48">
 </head>
 <body class="has-sticky">
 <div id="nav-mount"></div>
 <div class="r-sticky-bar">
-  <div class="px">1 190 € <small>/ pers</small></div>
-  <a href="#reserver" class="btn btn-dark">Je m'inscris</a>
+  <div class="px"><span data-prix-sticky>Dès 1 190 €</span> <small>/ pers</small></div>
+  <a href="#chambres" class="btn btn-dark">Je m'inscris</a>
 </div>
 
 <!-- HERO VISUEL -->
@@ -25,7 +25,7 @@
     <h1 class="sr-only">Le jour d'après</h1>
     <div class="r-meta reveal" data-d="2">
       <span><svg class="meta-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zM5 9h14v10H5V9z"/></svg>Du 18 au 22 novembre 2026</span>
-      <span><svg class="meta-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Le Plessis-Placy</span>
+      <span><svg class="meta-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Le Plessis-Placy · À 50 minutes de Paris</span>
       <span><svg class="meta-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-2.7 0-8 1.3-8 4v3h10v-3c0-1 .5-1.9 1.3-2.6A12 12 0 0 0 8 13zm8 0c-.4 0-.7 0-1.1.1A5.6 5.6 0 0 1 18 17v3h6v-3c0-2.7-5.3-4-8-4z"/></svg>Places limitées · femmes exclusivement</span>
     </div>
   </div>
@@ -75,21 +75,54 @@
 
       <!-- ASIDE -->
       <aside class="r-aside reveal" data-d="1">
-        <div class="price">1 190 € <small>/ personne</small></div>
-        <div class="rooms">
-          <div><span>Chambre partagée</span><strong>1 190 €</strong></div>
-          <div><span>Chambre solo</span><strong>Sur demande</strong></div>
+        <div class="price"><span data-prix-tete>À partir de 1 190 €</span> <small>/ personne</small></div>
+        <h2 class="rooms-t" id="chambres">Choisis ta chambre</h2>
+        <p class="rooms-sub">Le prix et les disponibilités s'actualisent automatiquement.</p>
+        <div class="rooms" data-sejour="plessis">
+          <label class="room">
+            <input type="radio" name="chambre" value="partagee-3-6" data-prix="1 190 €">
+            <span class="room__r" aria-hidden="true"></span>
+            <span class="room__c">
+              <span class="room__t">Chambre partagée de 3 à 6</span>
+              <em class="room__d">lit simple · sdb partagée</em>
+              <span class="room__s"></span>
+            </span>
+            <strong class="room__p">1 190 €</strong>
+          </label>
+          <label class="room">
+            <input type="radio" name="chambre" value="duo-simple" data-prix="1 230 €">
+            <span class="room__r" aria-hidden="true"></span>
+            <span class="room__c">
+              <span class="room__t">Chambre duo</span>
+              <em class="room__d">lit simple · sdb partagée</em>
+              <span class="room__s"></span>
+            </span>
+            <strong class="room__p">1 230 €</strong>
+          </label>
+          <label class="room">
+            <input type="radio" name="chambre" value="solo" data-prix="1 289 €">
+            <span class="room__r" aria-hidden="true"></span>
+            <span class="room__c">
+              <span class="room__t">Chambre solo</span>
+              <em class="room__d">lit double · sdb privée</em>
+              <span class="room__s"></span>
+            </span>
+            <strong class="room__p">1 289 €</strong>
+          </label>
         </div>
-        <p class="muted" style="font-size:.86rem;margin:0 0 10px">Chambre partagée avec les autres participantes, dans une atmosphère conviviale et chaleureuse.</p>
-        <p class="muted" style="font-size:.86rem;margin:0 0 10px">Chambre solo : chambre individuelle pour profiter d'un espace entièrement à toi pendant le séjour.</p>
-        <p class="muted" style="font-size:.86rem;margin:0 0 14px">Les chambres individuelles sont disponibles en nombre limité et attribuées selon l'ordre des inscriptions.</p>
-        <a href="#reserver" class="btn btn-dark">Je m'inscris</a>
-        <a href="https://wa.me/33652980093" target="_blank" rel="noopener" class="btn btn-ghost">Une question sur WhatsApp</a>
+        <p class="muted" style="font-size:.86rem;margin:0 0 14px">Les chambres sont attribuées selon l'ordre des inscriptions.</p>
+        <label class="cgv">
+          <input type="checkbox" data-cgv>
+          <span>J'ai lu et j'accepte les <a href="cgv.html" target="_blank" rel="noopener">conditions générales de vente</a>.</span>
+        </label>
+        <p class="cgv-rappel" data-cgv-rappel hidden>Merci d'accepter les conditions générales de vente pour continuer.</p>
+        <a href="reserver.html?sejour=plessis" class="btn btn-dark is-bloque" data-reserver aria-disabled="true">Je m'inscris</a>
+        <a href="https://wa.me/33699023187" target="_blank" rel="noopener" class="btn btn-ghost">Une question sur WhatsApp</a>
         <p class="fineprint" style="margin-top:14px">Le tarif comprend l'hébergement, l'ensemble des repas, les ateliers, les pratiques de sophrologie ainsi que les activités prévues pendant le séjour.</p>
         <div class="contact-team">
-          <a href="https://wa.me/33652980093" target="_blank" rel="noopener" class="chip">
+          <a href="https://wa.me/33699023187" target="_blank" rel="noopener" class="chip">
             <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607z"/></svg>
-            WhatsApp Jade
+            WhatsApp
           </a>
           <a href="mailto:contact@jade-maa.com" class="chip">
             <svg viewBox="0 0 24 24"><path d="M0 3v18h24V3H0zm21.518 2L12 12.713 2.482 5h19.036zM2 19V7.183l10 8.104 10-8.104V19H2z"/></svg>
@@ -253,24 +286,21 @@
   </div>
 </section>
 
-<!-- RÉSERVATION : appel -->
+<!-- RÉSERVATION : WhatsApp -->
 <section class="section-follow" id="reserver">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow reveal">Réserver</span>
-      <h2 class="reveal" data-d="1">Réserve un appel <br>pour <em>bloquer ta place</em>.</h2>
-      <p class="reveal">On vérifie les disponibilités ensemble et on répond à toutes tes questions avant de confirmer. L'inscription se finalise à la fin de l'appel.</p>
+      <h2 class="reveal" data-d="1">Écris-nous <br>pour <em>bloquer ta place</em>.</h2>
+      <p class="reveal">Pour t'inscrire, contacte-nous directement sur WhatsApp&nbsp;: on vérifie les disponibilités ensemble, on répond à toutes tes questions, et on finalise ton inscription avec toi.</p>
     </div>
-    <div class="calendly-block reveal">
-      <!-- Calendly inline -->
-      <div class="calendly-inline-widget" data-url="https://calendly.com/jade-workspace1/nouvelle-reunion"></div>
+    <div class="actions reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+      <a href="https://wa.me/33699023187" target="_blank" rel="noopener" class="btn btn-dark">Nous écrire sur WhatsApp</a>
     </div>
-    <p style="text-align:center;margin-top:22px"><a href="https://wa.me/33652980093" target="_blank" rel="noopener" class="link-u">Une question d'abord ? Écris sur WhatsApp →</a></p>
   </div>
 </section>
 
 <div id="footer-mount"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="assets/partials.js"></script>
 <script src="assets/app.js"></script>
 </body>
